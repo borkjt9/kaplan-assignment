@@ -3,6 +3,8 @@ import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
 class App extends Component {
+  question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
+
   render() {
     return (
       <div className="app --dimensions-is-screen">
@@ -13,8 +15,10 @@ class App extends Component {
                 Question 1
               </h1>
             </div>
-            <div className="app__question-box__question-container">
-
+            <div className="app__question-box__question-container p-4 mr-10">
+              <p className="app__question-box__question-container__question-text">
+                {this.question}
+              </p>
             </div>
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">

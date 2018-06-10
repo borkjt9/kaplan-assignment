@@ -26,6 +26,11 @@ $borderColor: #D9D9D9;
     &__question-container {
       height: 100%;
       width: 100%;
+
+      &__question-text {
+        max-width: 600px;
+        width: 100%;
+      }
     }
   }
   &__btns-container {
