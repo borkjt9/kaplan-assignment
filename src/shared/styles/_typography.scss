@@ -1,0 +1,52 @@
+
+h1, h2, h3, h4, h5, a, p {
+  font-family: 'Open Sans', sans-serif;
+  font-variant-ligatures: no-common-ligatures;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  white-space: normal;
+  line-height: 1em;
+  text-indent: .3em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-indent: .2em;
+  text-transform: uppercase;
+  line-height: 1em;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-indent: .1em;
+  line-height: 1.2em;
+  margin-top: 5px;
+  margin-bottom: 5px
+}
+
+h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-indent: .1em;
+  line-height: 1.2em;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .05em;
+  text-indent: .1em;
+  margin: 5px 0px;
+  text-align: left;
+}
