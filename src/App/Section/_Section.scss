@@ -1,27 +1,50 @@
+$option-height: 60px;
+$option-border-radius: 10px;
+$option-background: #F9F9F9;
+$placeholder-primary-color: lightgray;
 .section {
   max-width: 300px;
   width: 45vw;
-
-  &__options-container {
-    position: relative;
+  &__placeholder-container {
+    position: absolute;
+    width: inherit;
+    max-width: inherit;
     &__option {
       position: relative;
-      height: 60px;
-      background: #F9F9F9;
-      border: 1px solid darkgray;
-      border-radius: 10px;
-      &__placeholder {
+      &__number {
         position: absolute;
-        border-radius: 10px;
-        border: 1px dotted darkgray;
+        color: $placeholder-primary-color;
       }
+      &__placeholder {
+        height: $option-height;
+        width: 100%;
+        border-radius: $option-border-radius;
+        border: 1px dashed $placeholder-primary-color;
+      }
+    }
+  }
+  &__answers-container {
+    position: absolute;
+    width: inherit;
+    max-width: inherit;
+    &__answers {
+      position: relative;
       &__answer {
+        height: $option-height;
+        background: $option-background;
+        border: 1px solid darkgray;
+        border-radius: $option-border-radius;
+        transition: 0.1s background ease-in-out;
         p {
           font-size: 1rem;
-
+        }
+        &:focus {
+          background: #007bff;
+          border-color:#007bff;
+          color: white;
+          outline: none;
         }
       }
     }
-
   }
 }

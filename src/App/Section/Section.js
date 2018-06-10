@@ -11,28 +11,42 @@ class Section extends Component {
     super(props);
   }
 
-  renderAnswerOptions(options) {
-    const optionsInnerHTML = options.map((option) => {
-      return (
-        <div className="section__options-container__option my-4">
-          <div className="section__options-container__option__placeholder"></div>
-          <div className="section__options-container__option__answer m-2">
-            <p>{option}</p>
+  renderPlaceholders(total) {
+    const optionsInnerHTML = [...Array(total).keys()].map((option) => (
+          <div className="section__placeholder-container__option my-4 d-flex align-items-center">
+            <h1 className="section__placeholder-container__option__number ml-4">{option+1}</h1>
+            <div className="section__placeholder-container__option__placeholder" />
           </div>
-        </div>
-      );
-    });
-
+      ));
     return (
-      <div className="section__options-container">
+      <div className="section__placeholder-container">
         {optionsInnerHTML}
       </div>
     );
   }
+
+  renderAnswers(answers) {
+    const answersInnerHTML = answers.map((answer) => {
+      return (
+        <div className="section__answers-container__answers my-4">
+          <button className="section__answers-container__answers__answer">
+            <p className="m-2">{answer}</p>
+          </button>
+        </div>
+      );
+    });
+    return (
+      <div className="section__answers-container">
+        {answersInnerHTML}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="section">
-        {this.renderAnswerOptions(this.props.options)}
+        {this.renderPlaceholders(5)}
+        {this.renderAnswers(this.props.options)}
       </div>
     );
   }
