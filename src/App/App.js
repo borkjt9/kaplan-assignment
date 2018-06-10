@@ -13,6 +13,11 @@ class App extends Component {
     this.setActiveAnswer = this.setActiveAnswer.bind(this);
   }
 
+  componentWillMount() {
+    const { dispatch } = this.props;
+    questionActions.requestGetQuestions(dispatch);
+  }
+
   setActiveAnswer(activeAnswer, activeQuestion) {
     const { dispatch } = this.props;
     dispatch(questionActions.setActiveAnswer(activeAnswer, activeQuestion));
@@ -25,6 +30,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('this props: ', this.props)
     const { activeQuestion } = this.props.questions;
     const activeQuestionDict = this.props.questions[activeQuestion];
     const { questionText, answers } = activeQuestionDict;

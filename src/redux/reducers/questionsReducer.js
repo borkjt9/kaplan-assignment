@@ -2,7 +2,12 @@ import {
   GET_QUESTIONS,
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
+  GET_QUESTIONS_START,
+  GET_QUESTIONS_ERRORED,
+  GET_QUESTIONS_FULFILLED,
 } from '../constants';
+
+import getQuestions from '../../firebase/questions';
 
 const initialState = {
   0: {
@@ -81,44 +86,14 @@ function positionAnswer(answersDict, toSide, fromSide, toIndex, fromIndex) {
   } else {
     return moveAnswerVert(answersDict, toSide, fromSide, toIndex, fromIndex)
   }
-  // if (newAnswersDict[toSide][index] == undefined) {
-  //   if (toSide === 'leftSideAnswers') {
-  //     newAnswersDict.leftSideAnswers[index] = newAnswersDict.rightSideAnswers[index];
-  //     delete newAnswersDict.rightSideAnswers[index];
-  //     return newAnswersDict;
-  //   } else {
-  //     newAnswersDict.rightSideAnswers[index] = newAnswersDict.leftSideAnswers[index];
-  //     delete newAnswersDict.leftSideAnswers[index];
-  //     return newAnswersDict;
-  //   }
-  // } else {
-  //   if (toSide === 'leftSideAnswers') {
-  //     let currKey = index;
-  //     while (answersDict.leftSideAnswers.currKey !== undefined) {
-  //       newAnswersDict.leftSideAnswers[currKey + 1] = answersDict.leftSideAnswers.currKey;
-  //       currKey += 1;
-  //     }
-  //     newAnswersDict.leftSideAnswers.index = newAnswersDict.rightSideAnswers.index;
-  //     delete newAnswersDict.rightSideAnswers.index;
-  //     return newAnswersDict;
-  //   } else {
-  //     let currKey = index;
-  //     while (answersDict.rightSideAnswers.currKey !== undefined) {
-  //       newAnswersDict.rightSideAnswers[currKey + 1] = answersDict.rightSideAnswers.currKey;
-  //       currKey += 1;
-  //     }
-  //     newAnswersDict.rightSideAnswers.index = newAnswersDict.leftSideAnswers.index;
-  //     delete newAnswersDict.leftSideAnswers.index;
-  //     return newAnswersDict;
-  //   }
-  // }
 }
 
 export default function questions(state = initialState, action) {
   const newState = { ... state }
   let question = -1;
   switch (action.type) {
-    case GET_QUESTIONS:
+    case GET_QUESTIONS_FULFILLED:
+      console.log('get questions fulfilled', action.payload)
       return action.payload;
     case SET_ACTIVE_ANSWER:
       question = action.payload.question;
