@@ -45,14 +45,17 @@ $shadow-color: #595959;
         p {
           font-size: 1rem;
         }
-        &.--active, &:focus {
+        &.--active {
           width: 104%;
           margin-left: -2%;
           background: #007bff;
           box-shadow: 1px 1px 3px $border-color;
           color: white;
-          outline: none;
         }
+         &:focus {
+           outline: none;
+
+         }
       }
 
       &__arrow-btn {

@@ -29,7 +29,11 @@ const Section = (props) => {
 
 
   function toggleArrowButtons(index) {
-    setActiveAnswer({ side, index }, activeQuestion);
+    if (index === activeAnswer.index) {
+      setActiveAnswer({ side, index: -1 }, activeQuestion);
+    } else {
+      setActiveAnswer({ side, index }, activeQuestion);
+    }
   }
 
   function callPositionAnswer(toIndex, fromIndex, dir) {
