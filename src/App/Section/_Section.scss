@@ -2,6 +2,8 @@ $option-height: 60px;
 $option-border-radius: 10px;
 $option-background: #F9F9F9;
 $placeholder-primary-color: lightgray;
+$border-color: lightgray;
+$shadow-color: #595959;
 .section {
   width: 45vw;
   margin: auto;
@@ -38,15 +40,16 @@ $placeholder-primary-color: lightgray;
         width: inherit;
         height: $option-height;
         background: $option-background;
-        border: 1px solid darkgray;
+        border: 1px solid $border-color;
         border-radius: $option-border-radius;
-        transition: 0.1s background ease-in-out;
         p {
           font-size: 1rem;
         }
         &.--active, &:focus {
+          width: 104%;
+          margin-left: -2%;
           background: #007bff;
-          border-color:#007bff;
+          box-shadow: 1px 1px 3px $border-color;
           color: white;
           outline: none;
         }
