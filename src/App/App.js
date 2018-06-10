@@ -20,7 +20,7 @@ class App extends Component {
         <div className="container">
           <div className="app__question-box row">
             <div className="app__question-box__header --purple d-flex align-items-center justify-content-center">
-              <h1 className="app_question-box__header__text">
+              <h1 className="app_question-box__header__question-number">
                 Question 1
               </h1>
             </div>
@@ -33,7 +33,7 @@ class App extends Component {
                   <Section options={this.questionOptions} />
                 </div>
                 <div className="col-5">
-                  <Section options={this.questionOptions} />
+                  <Section />
                 </div>
               </div>
             </div>

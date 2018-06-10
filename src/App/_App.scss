@@ -1,7 +1,8 @@
 $btns-container-height: 80px;
 $container-max-width: 1200px;
-$borderColor: #D9D9D9;
-
+$header-height: 80px;
+$border-color: #D9D9D9;
+$header-color: #23166A;
 .app {
   background-color: #F9F9F9;
   width: 100vw;
@@ -9,43 +10,40 @@ $borderColor: #D9D9D9;
     &__question-box {
       background-color: white;
       max-width: $container-max-width;
-      max-height: 1200px;
+      width: inherit;
+      max-height: $container-max-width;
       height: calc(100vh - #{$btns-container-height});
-      border: solid 1px $borderColor;
-      box-shadow: 1px 1px 1px $borderColor;
+      border: solid 1px $border-color;
+      box-shadow: 1px 1px 1px $border-color;
       &__header {
-        width: 100%;
-        background-color: #23166A;
+        width: inherit;
+        background-color: $header-color;
         color: white;
-        text-align: center;
-        height: 80px;
-      &__text {
-        line-height: 80px;
+        height: $header-height;
+      &__question-number {
+
       }
     }
     &__question-container {
-      height: 100%;
-      width: 100%;
+      height: inherit;
+      width: inherit;
 
       &__question-text {
-        max-width: 600px;
-        width: 100%;
+        max-width: calc(#{$container-max-width} / 2);
+        width: inherit;
       }
     }
   }
   &__btns-container {
     height: $btns-container-height;
     max-width: $container-max-width;
+    width: inherit;
     &__btn {
-
       &.--nxt {
-        background-color: black;
-        color: white;
       }
 
       &.--prev {
-        background-color: inherit;
-        color: #1062E5;
+
       }
     }
   }
