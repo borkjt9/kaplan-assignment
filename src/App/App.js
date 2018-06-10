@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Section from './Section/Section';
+import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
 class App extends Component {
-  question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
-  questionOptions = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  ]
+  constructor(props) {
+    super(props);
+    this.positionAnswer = this.positionAnswer.bind(this);
+    this.setActiveAnswer = this.setActiveAnswer.bind(this);
+  }
 
+  setActiveAnswer(activeAnswer, activeQuestion) {
+    const { dispatch } = this.props;
+    dispatch(questionActions.setActiveAnswer(activeAnswer, activeQuestion));
+  }
+
+  positionAnswer(data) {
+    const { dispatch } = this.props;
+
+    dispatch(questionActions.positionAnswer(data));
+  }
 
   render() {
+    const { activeQuestion } = this.props.questions;
+    const activeQuestionDict = this.props.questions[activeQuestion];
+    const { questionText, answers } = activeQuestionDict;
+    const {
+      left,
+      right,
+      totalAnswers,
+      activeAnswer,
+    } = answers;
     return (
       <div className="app --dimensions-is-screen">
         <div className="container">
@@ -26,15 +45,27 @@ class App extends Component {
             </div>
             <div className="app__question-box__question-container p-5">
               <p className="app__question-box__question-container__question-text">
-                {this.question}
+                {questionText}
               </p>
               <div className="app_question-box__question-container__options row">
-                <div className="col-5">
-                  <Section options={this.questionOptions} />
-                </div>
-                <div className="col-5">
-                  <Section />
-                </div>
+                <Section
+                  answersDict={left}
+                  totalAnswers={totalAnswers}
+                  side="left"
+                  activeAnswer={activeAnswer}
+                  positionAnswer={this.positionAnswer}
+                  setActiveAnswer={this.setActiveAnswer}
+                  activeQuestion={activeQuestion}
+                />
+                <Section
+                  answersDict={right}
+                  totalAnswers={totalAnswers}
+                  side="right"
+                  activeAnswer={activeAnswer}
+                  positionAnswer={this.positionAnswer}
+                  setActiveAnswer={this.setActiveAnswer}
+                  activeQuestion={activeQuestion}
+                />
               </div>
             </div>
           </div>
@@ -52,4 +83,18 @@ class App extends Component {
   }
 }
 
-export default App;
+App.defaultProps = {
+  activeQuestion: 0,
+};
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  activeQuestion: PropTypes.number,
+  questions: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+function mapStateToProps(state) {
+  return (state);
+}
+
+export default connect(mapStateToProps)(App);
