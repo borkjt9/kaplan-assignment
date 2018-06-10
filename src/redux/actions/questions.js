@@ -1,6 +1,7 @@
 import {
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
+  SET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
   GET_QUESTIONS_ERRORED,
   GET_QUESTIONS_FULFILLED,
@@ -19,6 +20,13 @@ export function setActiveAnswer(activeAnswer, question) {
   return ({
     type: SET_ACTIVE_ANSWER,
     payload: { activeAnswer, question },
+  });
+}
+
+export function setActiveQuestion(newQuestion) {
+  return ({
+    type: SET_ACTIVE_QUESTION,
+    payload: { newQuestion },
   });
 }
 

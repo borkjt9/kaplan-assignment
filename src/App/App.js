@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.positionAnswer = this.positionAnswer.bind(this);
     this.setActiveAnswer = this.setActiveAnswer.bind(this);
+    this.setActiveQuestion = this.setActiveQuestion.bind(this);
   }
 
   componentWillMount() {
@@ -23,14 +24,19 @@ class App extends Component {
     dispatch(questionActions.setActiveAnswer(activeAnswer, activeQuestion));
   }
 
+  setActiveQuestion(newQuestion) {
+    const { dispatch, questions } = this.props;
+    if (newQuestion >= 0 && newQuestion < (Object.keys(questions)).length - 1) {
+      dispatch(questionActions.setActiveQuestion(newQuestion));
+    }
+  }
+
   positionAnswer(data) {
     const { dispatch } = this.props;
-
     dispatch(questionActions.positionAnswer(data));
   }
 
   render() {
-    console.log('this props: ', this.props)
     const { activeQuestion } = this.props.questions;
     const activeQuestionDict = this.props.questions[activeQuestion];
     const { questionText, answers } = activeQuestionDict;
@@ -76,10 +82,10 @@ class App extends Component {
             </div>
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">
-            <button type="button" className="app__btns-container__btn --prev col-2 btn btn-secondary">
+            <button type="button" onClick={ () => this.setActiveQuestion(activeQuestion - 1)} className="app__btns-container__btn --prev col-2 btn btn-secondary">
               PREV
             </button>
-            <button type="button" className="app__btns-container__btn --next col-2 btn btn-primary">
+            <button type="button" onClick={() => this.setActiveQuestion(activeQuestion + 1)} className="app__btns-container__btn --next col-2 btn btn-primary">
               NEXT
             </button>
           </div>

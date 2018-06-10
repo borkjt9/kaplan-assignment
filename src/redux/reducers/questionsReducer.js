@@ -2,6 +2,7 @@ import {
   GET_QUESTIONS,
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
+  SET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
   GET_QUESTIONS_ERRORED,
   GET_QUESTIONS_FULFILLED,
@@ -11,16 +12,16 @@ import getQuestions from '../../firebase/questions';
 
 const initialState = {
   0: {
-    questionText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+    questionText: '',
     answers: {
       left: {
-        0: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        1: 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        4: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        0: '',
+        1: '',
+        2: '',
+        3: '',
+        4: '',
       },
       right: {
-        2: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-        3: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       },
       totalAnswers: 5,
       activeAnswer: { side: 'left', index: -1 },
@@ -102,6 +103,10 @@ export default function questions(state = initialState, action) {
       newState[question].answers.activeAnswer = activeAnswer;
       console.log('new state: ', newState)
       return newState
+    case SET_ACTIVE_QUESTION:
+      const { newQuestion } = action.payload;
+      newState.activeQuestion = newQuestion;
+      return newState;
     case POSITION_ANSWER:
       question = action.payload.activeQuestion;
       const { toSide, fromSide, toIndex, fromIndex } = action.payload;
