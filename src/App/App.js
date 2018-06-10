@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+
+import Section from './Section/Section';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
 class App extends Component {
   question = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
+  questionOptions = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  ]
+
 
   render() {
     return (
@@ -15,10 +24,18 @@ class App extends Component {
                 Question 1
               </h1>
             </div>
-            <div className="app__question-box__question-container p-4 mr-10">
+            <div className="app__question-box__question-container p-5">
               <p className="app__question-box__question-container__question-text">
                 {this.question}
               </p>
+              <div className="app_question-box__question-container__options row">
+                <div className="col-5">
+                  <Section options={this.questionOptions} />
+                </div>
+                <div className="col-5">
+                  <Section options={this.questionOptions} />
+                </div>
+              </div>
             </div>
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">

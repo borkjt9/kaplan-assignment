@@ -1,0 +1,27 @@
+.section {
+  max-width: 300px;
+  width: 45vw;
+
+  &__options-container {
+    position: relative;
+    &__option {
+      position: relative;
+      height: 60px;
+      background: #F9F9F9;
+      border: 1px solid darkgray;
+      border-radius: 10px;
+      &__placeholder {
+        position: absolute;
+        border-radius: 10px;
+        border: 1px dotted darkgray;
+      }
+      &__answer {
+        p {
+          font-size: 1rem;
+
+        }
+      }
+    }
+
+  }
+}
