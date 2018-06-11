@@ -1,3 +1,8 @@
+/**
+ * @file Placeholder
+ * @author John Borkowski
+ * @version 0.1
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';

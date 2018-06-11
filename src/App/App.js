@@ -17,7 +17,7 @@ import '../shared/styles/_rootStyles.scss';
 
 class App extends Component {
   /**
-   * The App component is the highest order React component. It connects to the Redux Store.
+   * The highest order React component. It connects to the Redux Store.
    * All other components are fed store data as props.
    */
 

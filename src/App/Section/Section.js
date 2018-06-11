@@ -1,3 +1,8 @@
+/**
+ * @file Sesction
+ * @author John Borkowski
+ * @version 0.1
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-dnd';
