@@ -1,18 +1,28 @@
 import {
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
+  SET_ANSWER_POSITION,
   SET_ACTIVE_QUESTION,
+  RESET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
   GET_QUESTIONS_ERRORED,
   GET_QUESTIONS_FULFILLED,
 } from '../constants';
 
-import { getQuestions } from '../../firebase/questions';
+import { getQuestions, loadedQuestionsDict } from '../../firebase/questions';
 
 export function positionAnswer(data) {
+  console.log('loadedQuestionsDict')
   return ({
     type: POSITION_ANSWER,
     payload: data,
+  });
+}
+
+export function setAnswerPosition(index, position) {
+  return ({
+    type: SET_ANSWER_POSITION,
+    payload: { index, position },
   });
 }
 
@@ -27,6 +37,17 @@ export function setActiveQuestion(newQuestion) {
   return ({
     type: SET_ACTIVE_QUESTION,
     payload: { newQuestion },
+  });
+}
+
+export function resetActiveQuestion(activeQuestion) {
+  console.log('active question: ', activeQuestion)
+  console.log('loadedQuestionsDict action', loadedQuestionsDict)
+  const copy = JSON.parse(JSON.stringify(loadedQuestionsDict[activeQuestion]));
+
+  return ({
+    type: RESET_ACTIVE_QUESTION,
+    payload: { activeQuestion, initialVal: copy },
   });
 }
 

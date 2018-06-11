@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import Section from './Section/Section';
 import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
@@ -12,6 +14,7 @@ class App extends Component {
     this.positionAnswer = this.positionAnswer.bind(this);
     this.setActiveAnswer = this.setActiveAnswer.bind(this);
     this.setActiveQuestion = this.setActiveQuestion.bind(this);
+    this.resetActiveQuestion = this.resetActiveQuestion.bind(this);
   }
 
   componentWillMount() {
@@ -31,9 +34,20 @@ class App extends Component {
     }
   }
 
+  resetActiveQuestion(activeQuestion) {
+    const { dispatch } = this.props;
+    console.log('attempting to reset')
+    dispatch(questionActions.resetActiveQuestion(activeQuestion))
+  }
+
   positionAnswer(data) {
     const { dispatch } = this.props;
     dispatch(questionActions.positionAnswer(data));
+  }
+
+  setAnswerPosition(answer, position) {
+    const { dispatch } = this.props;
+    dispatch(questionActions.setAnswerPosition(answer, position));
   }
 
   render() {
@@ -79,7 +93,15 @@ class App extends Component {
                   activeQuestion={activeQuestion}
                 />
               </div>
+              <div className="app__question-box__question-container__reset-container">
+                <button
+                  className="app__question-box__question-container__reset-container__btn btn btn-link"
+                  onClick={() => this.resetActiveQuestion(activeQuestion)} >
+                  RESET
+                </button>
+              </div>
             </div>
+
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">
             <button type="button" onClick={ () => this.setActiveQuestion(activeQuestion - 1)} className="app__btns-container__btn --prev col-2 btn btn-secondary">
@@ -109,4 +131,4 @@ function mapStateToProps(state) {
   return (state);
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(App));

@@ -2,13 +2,14 @@ import {
   GET_QUESTIONS,
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
+  SET_ANSWER_POSITION,
   SET_ACTIVE_QUESTION,
+  RESET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
   GET_QUESTIONS_ERRORED,
   GET_QUESTIONS_FULFILLED,
 } from '../constants';
 
-import getQuestions from '../../firebase/questions';
 
 const initialState = {
   0: {
@@ -75,8 +76,6 @@ function moveAnswerVert(answersDict, toSide, fromSide, toIndex, fromIndex) {
     }
     return newAnswersDict;
   }
-
-
 }
 
 
@@ -90,11 +89,10 @@ function positionAnswer(answersDict, toSide, fromSide, toIndex, fromIndex) {
 }
 
 export default function questions(state = initialState, action) {
-  const newState = { ... state }
+  const newState = JSON.parse(JSON.stringify(state))
   let question = -1;
   switch (action.type) {
     case GET_QUESTIONS_FULFILLED:
-      console.log('get questions fulfilled', action.payload)
       return action.payload;
     case SET_ACTIVE_ANSWER:
       question = action.payload.question;
@@ -107,7 +105,15 @@ export default function questions(state = initialState, action) {
       const { newQuestion } = action.payload;
       newState.activeQuestion = newQuestion;
       return newState;
+    case RESET_ACTIVE_QUESTION:
+
+      const { activeQuestion, initialVal } = action.payload;
+      newState[activeQuestion] = initialVal
+      return newState
+    case SET_ANSWER_POSITION:
+      return newState;
     case POSITION_ANSWER:
+      console.log('position initial state: ', initialState);
       question = action.payload.activeQuestion;
       const { toSide, fromSide, toIndex, fromIndex } = action.payload;
       const questionDict = newState[question];

@@ -11,8 +11,8 @@ $header-color: #23166A;
       background-color: white;
       max-width: $container-max-width;
       width: inherit;
-      max-height: $container-max-width;
-      height: calc(100vh - #{$btns-container-height});
+      height: 700px;
+      max-height: calc(100vh - #{$btns-container-height});
       border: solid 1px $border-color;
       box-shadow: 1px 1px 1px $border-color;
       &__header {
@@ -29,8 +29,17 @@ $header-color: #23166A;
       width: inherit;
 
       &__question-text {
-        max-width: calc(#{$container-max-width} / 2);
+        max-width: calc(#{$container-max-width} * 2 / 3);
         width: inherit;
+      }
+
+      &__reset-container {
+        margin-top: 380px; //60px per answer height, 15px per margin * 5. Plus 5 for padding.
+        position: relative;
+
+        &__btn {
+
+        }
       }
     }
   }
