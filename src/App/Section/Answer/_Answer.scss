@@ -7,11 +7,10 @@ $shadow-color: #595959;
 
 .answer {
   position: relative;
-  width: inherit;
   background-color: inherit;
   &__answer-btn {
     width: inherit;
-    height: $option-height;
+    min-height: $option-height;
     background: $option-background;
     border: 1px solid $border-color;
     border-radius: $option-border-radius;

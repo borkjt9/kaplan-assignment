@@ -3,14 +3,8 @@ $option-height: 60px;
 .section {
   width: 45vw;
   margin: auto;
-  &__placeholder-container {
-    position: absolute;
-    width: 100%;
-    max-width: 66%;
-  }
   &__answers-container {
-    position: absolute;
-    width: 100%;
+    width: 95%;
     max-width: 66%;
     &__answer--blank {
       height: $option-height;
