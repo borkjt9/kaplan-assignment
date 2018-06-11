@@ -13,9 +13,8 @@ const answerSource = {
       top,
       side,
       index,
-      activeQuestion,
     } = props;
-    props.setActiveAnswer({ side, index }, activeQuestion);
+    props.setActiveAnswer({ side, index });
     return { id, left, top };
   },
 };

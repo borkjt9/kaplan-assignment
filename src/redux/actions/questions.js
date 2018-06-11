@@ -1,7 +1,6 @@
 import {
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
-  SET_ANSWER_POSITION,
   SET_ACTIVE_QUESTION,
   RESET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
@@ -15,13 +14,6 @@ export function positionAnswer(data) {
   return ({
     type: POSITION_ANSWER,
     payload: data,
-  });
-}
-
-export function setAnswerPosition(index, position) {
-  return ({
-    type: SET_ANSWER_POSITION,
-    payload: { index, position },
   });
 }
 

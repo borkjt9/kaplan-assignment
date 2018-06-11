@@ -6,7 +6,6 @@ $header-color: #23166A;
 .app {
   background-color: #F9F9F9;
   width: 100vw;
-
     &__question-box {
       background-color: white;
       max-width: $container-max-width;
@@ -27,16 +26,13 @@ $header-color: #23166A;
     &__question-container {
       height: inherit;
       width: inherit;
-
       &__question-text {
         max-width: calc(#{$container-max-width} * 2 / 3);
         width: inherit;
       }
-
       &__reset-container {
         margin-top: 380px; //60px per answer height, 15px per margin * 5. Plus 5 for padding.
         position: relative;
-
         &__btn {
 
         }
@@ -49,8 +45,8 @@ $header-color: #23166A;
     width: inherit;
     &__btn {
       &.--nxt {
-      }
 
+      }
       &.--prev {
 
       }

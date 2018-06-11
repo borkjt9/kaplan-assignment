@@ -1,7 +1,6 @@
 import {
   POSITION_ANSWER,
   SET_ACTIVE_ANSWER,
-  SET_ANSWER_POSITION,
   SET_ACTIVE_QUESTION,
   RESET_ACTIVE_QUESTION,
   GET_QUESTIONS_START,
@@ -92,8 +91,6 @@ export default function questions(state = initialState, action) {
       newState[activeQuestion] = initialVal;
       return newState;
     }
-    case SET_ANSWER_POSITION:
-      return newState;
     case POSITION_ANSWER: {
       const { activeQuestion } = action.payload;
       const {

@@ -1,3 +1,8 @@
+/**
+ * @file App
+ * @author John Borkowski
+ * @version 0.1
+ */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -11,6 +16,40 @@ import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
 class App extends Component {
+  /**
+   * The App component is the highest order React component. It connects to the Redux Store.
+   * All other components are fed store data as props.
+   */
+  propTypes = {
+    /** dispatch is redux function to call actions */
+    dispatch: PropTypes.func.isRequired,
+    /** questions pulls all questions from database. Each key is the question number.
+     * There are two extra keys: activeQuestion and status of firebase question loading.
+     * Each question key is assigned a dict that includes the questionText, answers, activeAnswer.
+     * EXAMPLE: questions: {
+                 0: {
+                   questionText: '',
+                   answers: {
+                     left: {
+                       0: '',
+                       1: '',
+                       2: '',
+                       3: '',
+                       4: '',
+                     },
+                     right: {
+                     },
+                     totalAnswers: 5,
+                     activeAnswer: { side: 'left', index: -1 },
+                   },
+                 },
+                 activeQuestion: 0,
+                 status: 'loading',
+               };
+     */
+    questions: PropTypes.objectOf(PropTypes.any).isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.positionAnswer = this.positionAnswer.bind(this);
@@ -24,49 +63,72 @@ class App extends Component {
     this.loadQuestions();
   }
 
-  setActiveAnswer(activeAnswer, activeQuestion) {
-    const { dispatch } = this.props;
-    dispatch(questionActions.setActiveAnswer(activeAnswer, activeQuestion));
+  /**
+   * When an Answer component is clicked or dragged, setActiveAnswer
+   * stores that answer as active in the redux store.
+   *
+   * @param {Object} activeAnswer - The new active answer. EXAMPLE: { side: 'left', index: 1 }
+   */
+  setActiveAnswer(activeAnswer) {
+    const { dispatch, questions } = this.props;
+    dispatch(questionActions.setActiveAnswer(activeAnswer, questions.activeQuestion));
   }
 
+  /**
+   * Rotates through questions in question props.
+   *
+   * @param {Number} newQuestion - The new active question.
+   */
   setActiveQuestion(newQuestion) {
     const { dispatch, questions } = this.props;
-    if (newQuestion >= 0 && newQuestion < (Object.keys(questions)).length - 1) {
+    // The 2 is to account for activeQuestion and status keys
+    if (newQuestion >= 0 && newQuestion < (Object.keys(questions)).length - 2) {
       dispatch(questionActions.setActiveQuestion(newQuestion));
     }
   }
 
-  setAnswerPosition(answer, position) {
-    const { dispatch } = this.props;
-    dispatch(questionActions.setAnswerPosition(answer, position));
-  }
-
+  /**
+   * Rotates through questions in question props.
+   *
+   * @param {Number} newQuestion - The new active question.
+   */
   loadQuestions() {
     const { dispatch } = this.props;
     questionActions.requestGetQuestions(dispatch);
   }
 
-  positionAnswer(data) {
+  /**
+   * Rotates through questions in question props.
+   *
+   * @param {Object} answerPosDict - Contains all info necessary to position answer to new location
+   * EXAMPLE: { toIndex,
+   *            fromIndex,
+   *            activeQuestion,
+   *            toSide,
+   *            fromSide }
+   */
+  positionAnswer(answerPosDict) {
     const { dispatch } = this.props;
-    dispatch(questionActions.positionAnswer(data));
+    dispatch(questionActions.positionAnswer(answerPosDict));
   }
 
+  /**
+   * Called by reset button. Resets answer locations to initial state.
+   *
+   * @param {Number} activeQuestion - The active Question
+   */
   resetActiveQuestion(activeQuestion) {
     const { dispatch } = this.props;
     dispatch(questionActions.resetActiveQuestion(activeQuestion));
   }
 
-  renderSpinner() {
-    const { status } = this.props;
+  /**
+   * Renders a loading animation or an error button if loadQuestions() is unsuccessful.
+   *
+   * @param {String} status - Set to one of ('success', 'loading', 'error')
+   */
+  renderLoadingError(status) {
     if (status === 'loading') {
-      return (
-        <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
-      )
-    }
-  }
-
-  renderLoader(status) {
-    if (status == 'loading') {
       return (
         <div className=" --vert-center col-12">
           <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
@@ -78,11 +140,18 @@ class App extends Component {
         <button onClick={() => this.loadQuestions()} className="text-center btn btn-danger my-3">
           RELOAD QUESTIONS
         </button>
-          <h5 className="my-3">Questions did not load correctly. Please check your internet connection and try again.</h5>
+        <h5 className="my-3">
+          Questions did not load correctly. Please check your internet connection and try again.
+        </h5>
       </div>
     );
   }
-
+  /**
+   * Renders the question container if loadQuestions() is successful.
+   * Contains question text, answer components, and placeholder components
+   *
+   * @param {String} status - Set to one of ('success', 'loading', 'error')
+   */
   renderQuestionContainer() {
     const { questions } = this.props;
     const { activeQuestion } = questions;
@@ -143,7 +212,7 @@ class App extends Component {
                 Question 1
               </h1>
             </div>
-            {status === 'loading' || status === 'error' ? this.renderLoader(status) : this.renderQuestionContainer()}
+            {status === 'loading' || status === 'error' ? this.renderLoadingError(status) : this.renderQuestionContainer()}
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">
             <button
@@ -167,11 +236,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  questions: PropTypes.objectOf(PropTypes.any).isRequired,
-};
 
 function mapStateToProps(state) {
   return (state);
