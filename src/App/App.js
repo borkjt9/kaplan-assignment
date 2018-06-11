@@ -17,18 +17,11 @@ class App extends Component {
     this.setActiveAnswer = this.setActiveAnswer.bind(this);
     this.setActiveQuestion = this.setActiveQuestion.bind(this);
     this.resetActiveQuestion = this.resetActiveQuestion.bind(this);
-    this.state = {
-      initialLoad: true,
-    };
+    this.loadQuestions = this.loadQuestions.bind(this);
   }
 
   componentWillMount() {
-    const { dispatch } = this.props;
-    questionActions.requestGetQuestions(dispatch);
-  }
-
-  componentDidMount() {
-
+    this.loadQuestions();
   }
 
   setActiveAnswer(activeAnswer, activeQuestion) {
@@ -48,6 +41,11 @@ class App extends Component {
     dispatch(questionActions.setAnswerPosition(answer, position));
   }
 
+  loadQuestions() {
+    const { dispatch } = this.props;
+    questionActions.requestGetQuestions(dispatch);
+  }
+
   positionAnswer(data) {
     const { dispatch } = this.props;
     dispatch(questionActions.positionAnswer(data));
@@ -58,27 +56,36 @@ class App extends Component {
     dispatch(questionActions.resetActiveQuestion(activeQuestion));
   }
 
-  render() {
-    const { questions } = this.props;
-    const { activeQuestion } = questions;
-    if (activeQuestion < 0) {
+  renderSpinner() {
+    const { status } = this.props;
+    if (status === 'loading') {
       return (
-        <div className="app --dimensions-is-screen --is-loading">
-          <div className="container">
-            <div className="app__question-box row">
-              <div className="app__question-box__header --purple d-flex align-items-center justify-content-center">
-                <h1 className="app_question-box__header__question-number">
-                  Question 1
-                </h1>
-              </div>
-              <div className=" --vert-center col-12">
-                <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
-              </div>
-            </div>
-          </div>
+        <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
+      )
+    }
+  }
+
+  renderLoader(status) {
+    if (status == 'loading') {
+      return (
+        <div className=" --vert-center col-12">
+          <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
         </div>
       );
     }
+    return (
+      <div className=" --vert-center col-12 text-center">
+        <button onClick={() => this.loadQuestions()} className="text-center btn btn-danger my-3">
+          RELOAD QUESTIONS
+        </button>
+          <h5 className="my-3">Questions did not load correctly. Please check your internet connection and try again.</h5>
+      </div>
+    );
+  }
+
+  renderQuestionContainer() {
+    const { questions } = this.props;
+    const { activeQuestion } = questions;
     const activeQuestionDict = questions[activeQuestion];
     const { questionText, answers } = activeQuestionDict;
     const {
@@ -88,48 +95,55 @@ class App extends Component {
       activeAnswer,
     } = answers;
     return (
-      <div className="app --dimensions-is-screen">
+      <div className="app__question-box__question-container p-5">
+        <p className="app__question-box__question-container__question-text">
+          {questionText}
+        </p>
+        <div className="app_question-box__question-container__options row">
+          <Section
+            answersDict={left}
+            totalAnswers={totalAnswers}
+            side="left"
+            activeAnswer={activeAnswer}
+            positionAnswer={this.positionAnswer}
+            setActiveAnswer={this.setActiveAnswer}
+            activeQuestion={activeQuestion}
+          />
+          <Section
+            answersDict={right}
+            totalAnswers={totalAnswers}
+            side="right"
+            activeAnswer={activeAnswer}
+            positionAnswer={this.positionAnswer}
+            setActiveAnswer={this.setActiveAnswer}
+            activeQuestion={activeQuestion}
+          />
+        </div>
+        <div className="app__question-box__question-container__reset-container">
+          <button
+            className="app__question-box__question-container__reset-container__btn btn btn-link"
+            onClick={() => this.resetActiveQuestion(activeQuestion)}
+          >
+            RESET
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { questions } = this.props;
+    const { activeQuestion, status } = questions;
+    return (
+      <div className="app --dimensions-is-screen --is-loading">
         <div className="container">
           <div className="app__question-box row">
             <div className="app__question-box__header --purple d-flex align-items-center justify-content-center">
               <h1 className="app_question-box__header__question-number">
-                {`Question ${activeQuestion + 1}`}
+                Question 1
               </h1>
             </div>
-            <div className="app__question-box__question-container p-5">
-              <p className="app__question-box__question-container__question-text">
-                {questionText}
-              </p>
-              <div className="app_question-box__question-container__options row">
-                <Section
-                  answersDict={left}
-                  totalAnswers={totalAnswers}
-                  side="left"
-                  activeAnswer={activeAnswer}
-                  positionAnswer={this.positionAnswer}
-                  setActiveAnswer={this.setActiveAnswer}
-                  activeQuestion={activeQuestion}
-                />
-                <Section
-                  answersDict={right}
-                  totalAnswers={totalAnswers}
-                  side="right"
-                  activeAnswer={activeAnswer}
-                  positionAnswer={this.positionAnswer}
-                  setActiveAnswer={this.setActiveAnswer}
-                  activeQuestion={activeQuestion}
-                />
-              </div>
-              <div className="app__question-box__question-container__reset-container">
-                <button
-                  className="app__question-box__question-container__reset-container__btn btn btn-link"
-                  onClick={() => this.resetActiveQuestion(activeQuestion)}
-                >
-                  RESET
-                </button>
-              </div>
-            </div>
-
+            {status === 'loading' || status === 'error' ? this.renderLoader(status) : this.renderQuestionContainer()}
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">
             <button
@@ -147,20 +161,16 @@ class App extends Component {
               NEXT
             </button>
           </div>
+          {preloadIMGs()}
         </div>
-        {preloadIMGs()}
       </div>
     );
   }
 }
 
-App.defaultProps = {
-  questions: { activeQuestion: -1 },
-};
-
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  questions: PropTypes.objectOf(PropTypes.any),
+  questions: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 function mapStateToProps(state) {

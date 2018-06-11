@@ -4,28 +4,14 @@ import {
   SET_ANSWER_POSITION,
   SET_ACTIVE_QUESTION,
   RESET_ACTIVE_QUESTION,
+  GET_QUESTIONS_START,
+  GET_QUESTIONS_ERRORED,
   GET_QUESTIONS_FULFILLED,
 } from '../constants';
 
 const initialState = {
+  status: 'loading',
   activeQuestion: -1,
-  // 0: {
-  //   questionText: '',
-  //   answers: {
-  //     left: {
-  //       0: '',
-  //       1: '',
-  //       2: '',
-  //       3: '',
-  //       4: '',
-  //     },
-  //     right: {
-  //     },
-  //     totalAnswers: 5,
-  //     activeAnswer: { side: 'left', index: -1 },
-  //   },
-  // },
-  // activeQuestion: 0,
 };
 
 function moveAnswerHoriz(answersDict, toSide, fromSide, toIndex, fromIndex) {
@@ -82,6 +68,12 @@ function positionAnswer(answersDict, toSide, fromSide, toIndex, fromIndex) {
 export default function questions(state = initialState, action) {
   const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
+    case GET_QUESTIONS_START:
+      newState.status = 'loading';
+      return newState;
+    case GET_QUESTIONS_ERRORED:
+      newState.status = 'error';
+      return newState;
     case GET_QUESTIONS_FULFILLED:
       return action.payload;
     case SET_ACTIVE_ANSWER: {

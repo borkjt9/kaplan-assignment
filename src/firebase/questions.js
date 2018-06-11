@@ -28,6 +28,7 @@ export let originalQuestionsDict = {
     },
   },
   activeQuestion: 0,
+  status: 'loading',
 };
 
 export function getQuestions(dispatch) {
@@ -41,6 +42,7 @@ export function getQuestions(dispatch) {
           defaultQuestionsObject[doc.id] = doc.data();
           itemsCounted += 1;
           if (itemsCounted === snapShotLength) {
+            defaultQuestionsObject.status = 'success';
             originalQuestionsDict = JSON.parse(JSON.stringify(defaultQuestionsObject));
             dispatch(getQuestionsFulfilled(defaultQuestionsObject));
           }
