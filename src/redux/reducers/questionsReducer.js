@@ -34,89 +34,86 @@ function moveAnswerHoriz(answersDict, toSide, fromSide, toIndex, fromIndex) {
     newAnswersDict.activeAnswer = { side: toSide, index: toIndex };
     delete newAnswersDict[fromSide][fromIndex];
     return newAnswersDict;
-  } else {
-    const temp = answersDict[toSide][toIndex]
-    newAnswersDict[toSide][toIndex] = newAnswersDict[fromSide][fromIndex];
-    newAnswersDict.activeAnswer = { side: toSide, index: toIndex };
-    newAnswersDict[fromSide][fromIndex] = temp;
-    return newAnswersDict;
   }
+  const temp = answersDict[toSide][toIndex];
+  newAnswersDict[toSide][toIndex] = newAnswersDict[fromSide][fromIndex];
+  newAnswersDict.activeAnswer = { side: toSide, index: toIndex };
+  newAnswersDict[fromSide][fromIndex] = temp;
+  return newAnswersDict;
 }
 
 
 function moveAnswerVert(answersDict, toSide, fromSide, toIndex, fromIndex) {
-  const newAnswersDict = answersDict;
-  if (toIndex < 0 || toIndex >= 5 ) {
-    return newAnswersDict
+  const newAnswersDict = JSON.parse(JSON.stringify(answersDict));
+  if (toIndex < 0 || toIndex >= 5) {
+    return newAnswersDict;
   } else if (newAnswersDict[toSide][toIndex] === undefined) {
-      newAnswersDict[toSide][toIndex] = newAnswersDict[fromSide][fromIndex]
-      newAnswersDict.activeAnswer = { side: toSide, index: toIndex };
-
-      delete newAnswersDict[fromSide][fromIndex];
-      return newAnswersDict;
-  } else {
-    let currIndex = toIndex;
-    if (toIndex < fromIndex) {
-      while (newAnswersDict[toSide][currIndex] !== undefined) {
-        currIndex -= 1
-      }
-    } else {
-      while (newAnswersDict[toSide][currIndex] !== undefined) {
-        currIndex += 1
-      }
-    }
-    if (-1 < currIndex && currIndex < 5) {
-      newAnswersDict[toSide][currIndex] = newAnswersDict[fromSide][fromIndex];
-      newAnswersDict.activeAnswer = { side: toSide, index: currIndex };
-      delete newAnswersDict[fromSide][fromIndex];
-    }
+    newAnswersDict[toSide][toIndex] = newAnswersDict[fromSide][fromIndex];
+    newAnswersDict.activeAnswer = { side: toSide, index: toIndex };
+    delete newAnswersDict[fromSide][fromIndex];
     return newAnswersDict;
   }
+  let currIndex = toIndex;
+  if (toIndex < fromIndex) {
+    while (newAnswersDict[toSide][currIndex] !== undefined) {
+      currIndex -= 1;
+    }
+  } else {
+    while (newAnswersDict[toSide][currIndex] !== undefined) {
+      currIndex += 1;
+    }
+  }
+  if (currIndex >= 0 && currIndex < 5) {
+    newAnswersDict[toSide][currIndex] = newAnswersDict[fromSide][fromIndex];
+    newAnswersDict.activeAnswer = { side: toSide, index: currIndex };
+    delete newAnswersDict[fromSide][fromIndex];
+  }
+  return newAnswersDict;
 }
-
-
 
 function positionAnswer(answersDict, toSide, fromSide, toIndex, fromIndex) {
   if (toSide !== fromSide) {
     return moveAnswerHoriz(answersDict, toSide, fromSide, toIndex, fromIndex);
-  } else {
-    return moveAnswerVert(answersDict, toSide, fromSide, toIndex, fromIndex)
   }
+  return moveAnswerVert(answersDict, toSide, fromSide, toIndex, fromIndex);
 }
 
 export default function questions(state = initialState, action) {
-  const newState = JSON.parse(JSON.stringify(state))
-  let question = -1;
+  const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case GET_QUESTIONS_FULFILLED:
       return action.payload;
-    case SET_ACTIVE_ANSWER:
-      question = action.payload.question;
+    case SET_ACTIVE_ANSWER: {
+      const { question } = action.payload;
       const { activeAnswer } = action.payload;
-      console.log('active answer: ', activeAnswer)
       newState[question].answers.activeAnswer = activeAnswer;
-      console.log('new state: ', newState)
-      return newState
-    case SET_ACTIVE_QUESTION:
+      return newState;
+    }
+    case SET_ACTIVE_QUESTION: {
       const { newQuestion } = action.payload;
       newState.activeQuestion = newQuestion;
       return newState;
-    case RESET_ACTIVE_QUESTION:
-
+    }
+    case RESET_ACTIVE_QUESTION: {
       const { activeQuestion, initialVal } = action.payload;
-      newState[activeQuestion] = initialVal
-      return newState
+      newState[activeQuestion] = initialVal;
+      return newState;
+    }
     case SET_ANSWER_POSITION:
       return newState;
-    case POSITION_ANSWER:
-      console.log('position initial state: ', initialState);
-      question = action.payload.activeQuestion;
-      const { toSide, fromSide, toIndex, fromIndex } = action.payload;
-      const questionDict = newState[question];
-      const newQuestionDict = questionDict;
+    case POSITION_ANSWER: {
+      const { activeQuestion } = action.payload;
+      const {
+        toSide,
+        fromSide,
+        toIndex,
+        fromIndex,
+      } = action.payload;
+      const questionDict = newState[activeQuestion];
       questionDict.answers = positionAnswer(questionDict.answers, toSide, fromSide, toIndex, fromIndex);
-      newState[question] = questionDict;
+      newState[activeQuestion] = questionDict;
       return newState;
+    }
     default:
       return state;
   }

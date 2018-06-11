@@ -65,7 +65,7 @@ class App extends Component {
           <div className="app__question-box row">
             <div className="app__question-box__header --purple d-flex align-items-center justify-content-center">
               <h1 className="app_question-box__header__question-number">
-                Question 1
+                {`Question ${activeQuestion + 1}`}
               </h1>
             </div>
             <div className="app__question-box__question-container p-5">
