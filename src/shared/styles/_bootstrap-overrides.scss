@@ -11,13 +11,13 @@
   &:focus {
     outline: none;
   }
-  
+
   &.btn-secondary {
     background-color: #F9F9F9;
     border-color: theme-color("primary");
     color: theme-color("primary");
     &:hover {
-      background-color: darken(#F9F9F9, 5%);
+      background-color: darken(#F9F9F9, 3%);
     }
   }
 }
