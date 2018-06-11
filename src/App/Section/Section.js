@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import Answer from './Answer/Answer';
 import Placeholder from './Placeholder/Placeholder';
-import { DragDropContext } from 'react-dnd';
-import { DropTarget } from 'react-dnd'
-
-import HTML5Backend from 'react-dnd-html5-backend';
-
 import './_Section.scss';
-
-
 
 const Section = (props) => {
   const {
@@ -43,7 +38,6 @@ const Section = (props) => {
     return (
       <div className="section__placeholder-container">
         {optionsInnerHTML}
-        <div style={ {clear: 'both'} } />
       </div>
     );
   }
@@ -75,12 +69,6 @@ const Section = (props) => {
             activeQuestion={activeQuestion}
             setActiveAnswer={setActiveAnswer}
           />
-          // <div className="section__answers-container__answer my-4">
-          //   <button onClick={() => toggleArrowButtons(index)} className={answerBtnClassName}>
-          //     <p className="m-2">{answersDict[index]}</p>
-          //   </button>
-          //   { (activeAnswer.index === index && activeAnswer.side === side) ? renderArrowButtons(index) : ''}
-          // </div>
         );
       }
       return (
