@@ -8,23 +8,24 @@ import {
 } from '../constants';
 
 const initialState = {
-  0: {
-    questionText: '',
-    answers: {
-      left: {
-        0: '',
-        1: '',
-        2: '',
-        3: '',
-        4: '',
-      },
-      right: {
-      },
-      totalAnswers: 5,
-      activeAnswer: { side: 'left', index: -1 },
-    },
-  },
-  activeQuestion: 0,
+  activeQuestion: -1,
+  // 0: {
+  //   questionText: '',
+  //   answers: {
+  //     left: {
+  //       0: '',
+  //       1: '',
+  //       2: '',
+  //       3: '',
+  //       4: '',
+  //     },
+  //     right: {
+  //     },
+  //     totalAnswers: 5,
+  //     activeAnswer: { side: 'left', index: -1 },
+  //   },
+  // },
+  // activeQuestion: 0,
 };
 
 function moveAnswerHoriz(answersDict, toSide, fromSide, toIndex, fromIndex) {

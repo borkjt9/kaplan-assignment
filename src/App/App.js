@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import Spinner from 'react-spinkit';
 import Section from './Section/Section';
 import preloadIMGs from '../shared/assets/assetURLs';
-
 import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
@@ -17,6 +17,9 @@ class App extends Component {
     this.setActiveAnswer = this.setActiveAnswer.bind(this);
     this.setActiveQuestion = this.setActiveQuestion.bind(this);
     this.resetActiveQuestion = this.resetActiveQuestion.bind(this);
+    this.state = {
+      initialLoad: true,
+    };
   }
 
   componentWillMount() {
@@ -56,8 +59,27 @@ class App extends Component {
   }
 
   render() {
-    const { activeQuestion } = this.props.questions;
-    const activeQuestionDict = this.props.questions[activeQuestion];
+    const { questions } = this.props;
+    const { activeQuestion } = questions;
+    if (activeQuestion < 0) {
+      return (
+        <div className="app --dimensions-is-screen --is-loading">
+          <div className="container">
+            <div className="app__question-box row">
+              <div className="app__question-box__header --purple d-flex align-items-center justify-content-center">
+                <h1 className="app_question-box__header__question-number">
+                  Question 1
+                </h1>
+              </div>
+              <div className=" --vert-center col-12">
+                <Spinner className="app__spinner --vert-center__child text-center" color="#007bff" />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    const activeQuestionDict = questions[activeQuestion];
     const { questionText, answers } = activeQuestionDict;
     const {
       left,
@@ -133,13 +155,12 @@ class App extends Component {
 }
 
 App.defaultProps = {
-  activeQuestion: 0,
+  questions: { activeQuestion: -1 },
 };
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  activeQuestion: PropTypes.number,
-  questions: PropTypes.objectOf(PropTypes.any).isRequired,
+  questions: PropTypes.objectOf(PropTypes.any),
 };
 
 function mapStateToProps(state) {
