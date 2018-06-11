@@ -20,35 +20,6 @@ class App extends Component {
    * The App component is the highest order React component. It connects to the Redux Store.
    * All other components are fed store data as props.
    */
-  propTypes = {
-    /** dispatch is redux function to call actions */
-    dispatch: PropTypes.func.isRequired,
-    /** questions pulls all questions from database. Each key is the question number.
-     * There are two extra keys: activeQuestion and status of firebase question loading.
-     * Each question key is assigned a dict that includes the questionText, answers, activeAnswer.
-     * EXAMPLE: questions: {
-                 0: {
-                   questionText: '',
-                   answers: {
-                     left: {
-                       0: '',
-                       1: '',
-                       2: '',
-                       3: '',
-                       4: '',
-                     },
-                     right: {
-                     },
-                     totalAnswers: 5,
-                     activeAnswer: { side: 'left', index: -1 },
-                   },
-                 },
-                 activeQuestion: 0,
-                 status: 'loading',
-               };
-     */
-    questions: PropTypes.objectOf(PropTypes.any).isRequired,
-  };
 
   constructor(props) {
     super(props);
@@ -236,6 +207,36 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  /** dispatch is redux function to call actions */
+  dispatch: PropTypes.func.isRequired,
+  /** questions pulls all questions from database. Each key is the question number.
+   * There are two extra keys: activeQuestion and status of firebase question loading.
+   * Each question key is assigned a dict that includes the questionText, answers, activeAnswer.
+   * EXAMPLE: questions: {
+               0: {
+                 questionText: '',
+                 answers: {
+                   left: {
+                     0: '',
+                     1: '',
+                     2: '',
+                     3: '',
+                     4: '',
+                   },
+                   right: {
+                   },
+                   totalAnswers: 5,
+                   activeAnswer: { side: 'left', index: -1 },
+                 },
+               },
+               activeQuestion: 0,
+               status: 'loading',
+             };
+   */
+  questions: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 function mapStateToProps(state) {
   return (state);

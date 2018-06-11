@@ -7,6 +7,10 @@ import Placeholder from './Placeholder/Placeholder';
 import './_Section.scss';
 
 const Section = (props) => {
+  /**
+   * There are two Sections: left and right. It containers answer and placeholder locations.
+   * There are a total of five Answers/Placeholders in each section.
+   */
   const {
     setActiveAnswer,
     positionAnswer,
@@ -17,6 +21,11 @@ const Section = (props) => {
     activeAnswer,
   } = props;
 
+  /**
+   * Called when an answer is not present at referenced index.
+   *
+   * @param {Number} total - The total answers to the problem. In this example hardcoded to 5.
+   */
   function renderPlaceholders(total) {
     const optionsInnerHTML = [...Array(total).keys()].map((index) => {
       if (answersDict[index] === undefined) {
@@ -32,6 +41,8 @@ const Section = (props) => {
         );
       }
       return (
+        // Returns a blank space if no placeholder to render.
+        // Needed in order to render next placeholder in correct location in section.
         <div className="section__answers-container__answer--blank my-4" />
       );
     });
@@ -42,20 +53,26 @@ const Section = (props) => {
     );
   }
 
+  /**
+   * Renders horizontal, down, and up arrow buttons if an Answer is active.
+   *
+   * @param {Number} index - The index of the Answer component being rendered.
+   */
   function toggleArrowButtons(index) {
     if (index === activeAnswer.index) {
+      // Sets index to -1 if you click on the current active answer (i.e. to deselect)
       setActiveAnswer({ side, index: -1 }, activeQuestion);
     } else {
       setActiveAnswer({ side, index }, activeQuestion);
     }
   }
 
+  /**
+   * Renders Answer Components for indexes found in AnswersDict.
+   *
+   */
   function renderAnswers() {
     const answersInnerHTML = [...Array(5).keys()].map((index) => {
-      // let answerBtnClassName = 'section__answers-container__answer__answer-btn';
-      // if (activeAnswer.index === index && activeAnswer.side === side) {
-      //   answerBtnClassName += ' --active';
-      // }
       if (answersDict[index] !== undefined) {
         return (
           <Answer
@@ -72,6 +89,8 @@ const Section = (props) => {
         );
       }
       return (
+        // Returns a blank space if no answer to render.
+        // Needed in order to render next answer in correct location in section.
         <div className="section__answers-container__answer--blank my-4" />
       );
     });
@@ -93,12 +112,29 @@ const Section = (props) => {
 
 
 Section.propTypes = {
+  /** called in toggleArrowButtons function. I.e when answer is clicked or dragged. */
   setActiveAnswer: PropTypes.func.isRequired,
+  /** Changes location of answer in section. */
   positionAnswer: PropTypes.func.isRequired,
+  /**
+   * Contains current locations of answers to be rendered.
+   * EXAMPLE: {0: 'answer1', 1: 'answer2', 3: 'answer 4'} }
+   *
+   */
   answersDict: PropTypes.objectOf(PropTypes.any).isRequired,
+  /**
+   * Total answers for the question.
+   * Used to render total number of answers and placeholders.
+   */
   totalAnswers: PropTypes.number.isRequired,
+  /** Either 'left' or 'right'. */
   side: PropTypes.string.isRequired,
+  /** Active question number. */
   activeQuestion: PropTypes.number.isRequired,
+  /**
+   * Current active answer. Used to select / deselect answerComponent.
+   * EXAMPLE: {side: 'left', index: 2}
+   */
   activeAnswer: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
