@@ -10,6 +10,10 @@ const defaultQuestionsObject = {
   activeQuestion: 0,
 };
 
+/**
+ * Caches result for loadQuestions().
+ * Used to reset answer positions to original positions if need be.
+ */
 export let originalQuestionsDict = {
   0: {
     questionText: '',
@@ -31,6 +35,10 @@ export let originalQuestionsDict = {
   status: 'loading',
 };
 
+/**
+ * Called when application is loaded to DOM.
+ * @param {Function} dispatch Used to communicate with react store.
+ */
 export function getQuestions(dispatch) {
   dispatch(() => {
     dispatch(getQuestionsStart());
@@ -43,6 +51,8 @@ export function getQuestions(dispatch) {
           itemsCounted += 1;
           if (itemsCounted === snapShotLength) {
             defaultQuestionsObject.status = 'success';
+            // Necessary to convert to JSON and back because originalQuestionsDict has nested dicts.
+            // Gets rid of all potential references in complex dict and is a pure clone of values.
             originalQuestionsDict = JSON.parse(JSON.stringify(defaultQuestionsObject));
             dispatch(getQuestionsFulfilled(defaultQuestionsObject));
           }

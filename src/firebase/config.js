@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import '@firebase/firestore';
-// import axios from 'axios'
 
 const config = {
   apiKey: 'AIzaSyBTFt3mvZ7JEOzWyn8Mr9n3tGny6kHdqDA',
