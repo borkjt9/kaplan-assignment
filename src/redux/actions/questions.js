@@ -9,10 +9,9 @@ import {
   GET_QUESTIONS_FULFILLED,
 } from '../constants';
 
-import { getQuestions, loadedQuestionsDict } from '../../firebase/questions';
+import { getQuestions, originalQuestionsDict } from '../../firebase/questions';
 
 export function positionAnswer(data) {
-  console.log('loadedQuestionsDict')
   return ({
     type: POSITION_ANSWER,
     payload: data,
@@ -41,9 +40,7 @@ export function setActiveQuestion(newQuestion) {
 }
 
 export function resetActiveQuestion(activeQuestion) {
-  console.log('active question: ', activeQuestion)
-  console.log('loadedQuestionsDict action', loadedQuestionsDict)
-  const copy = JSON.parse(JSON.stringify(loadedQuestionsDict[activeQuestion]));
+  const copy = JSON.parse(JSON.stringify(originalQuestionsDict[activeQuestion]));
 
   return ({
     type: RESET_ACTIVE_QUESTION,

@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-import '@firebase/firestore';
 import {
   getQuestionsStart,
   getQuestionsErrored,
@@ -12,7 +10,7 @@ const defaultQuestionsObject = {
   activeQuestion: 0,
 };
 
-export let loadedQuestionsDict = {
+export let originalQuestionsDict = {
   0: {
     questionText: '',
     answers: {
@@ -43,13 +41,12 @@ export function getQuestions(dispatch) {
           defaultQuestionsObject[doc.id] = doc.data();
           itemsCounted += 1;
           if (itemsCounted === snapShotLength) {
-            loadedQuestionsDict = JSON.parse(JSON.stringify(defaultQuestionsObject));
+            originalQuestionsDict = JSON.parse(JSON.stringify(defaultQuestionsObject));
             dispatch(getQuestionsFulfilled(defaultQuestionsObject));
           }
-      });
+        });
       })
       .catch((error) => {
-        console.log('error', error)
         dispatch(getQuestionsErrored(error));
       });
   });
