@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
-import dragPreview from '../../../shared/assets/drag-preview.png'
+import dragPreview from '../../../shared/assets/drag-preview.png';
 
 import { DRAGGABLE_TYPE_ANSWER } from '../../../redux/constants';
 import './_Answer.scss';
 
 const answerSource = {
-  beginDrag (props, dnd, element) {
-    console.log('props of knight, since these aren\'t in the docs')
-    console.log(props, dnd, element)
-    const { id, left, top, side, index, activeQuestion } = props
+  beginDrag(props) {
+    const {
+      id,
+      left,
+      top,
+      side,
+      index,
+      activeQuestion,
+    } = props;
     props.setActiveAnswer({ side, index }, activeQuestion);
-    return { id, left, top }
-  }
-}
+    return { id, left, top };
+  },
+};
 
-function collect (connect, monitor) {
+function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
-  }
+    isDragging: monitor.isDragging(),
+  };
 }
 
 class Answer extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
+    isDragging: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -39,7 +44,6 @@ class Answer extends Component {
   }
 
   callPositionAnswer(toIndex, fromIndex, dir) {
-
     const { positionAnswer, activeQuestion, side } = this.props;
     const data = {
       toIndex,
@@ -65,17 +69,15 @@ class Answer extends Component {
   renderArrowButtons(index) {
     const { side, totalAnswers } = this.props;
     const btnHorizClassName = `answer__arrow-btn --hor --${side}`;
-    const horizBtn = () => {
-      return (
-        <button onClick={() => this.callPositionAnswer(index, index, 'hor')} className={btnHorizClassName}>
-          <img
-            className= "answer__arrow-btn__img"
-            alt="move answers to left side or right side"
-            src={require('../../../shared/assets/horizontal-arrows.svg')}
-          />
-        </button>
-      )
-    }
+    const horizBtn = () => (
+      <button onClick={() => this.callPositionAnswer(index, index, 'hor')} className={btnHorizClassName}>
+        <img
+          className="answer__arrow-btn__img"
+          alt="move answers to left side or right side"
+          src={require('../../../shared/assets/horizontal-arrows.svg')}
+        />
+      </button>
+    );
     let btnUpClassName = `answer__arrow-btns__arrow-btn --vert --up --${side}`;
     let btnDownClassName = `answer__arrow-btns__arrow-btn --vert --down --${side}`;
     if (index === 0) {
@@ -87,28 +89,31 @@ class Answer extends Component {
     }
 
     if (side === 'right') {
-      const upBtn = () => {
-        return (
-          <button onClick={() => this.callPositionAnswer(index-1, index, 'vert')} className={btnUpClassName}>
-            <img
-              className= "answer__arrow-btns__arrow-btn__up__img"
-              alt="move answers to left side or right side"
-              src={require('../../../shared/assets/up-arrow.svg')}
-            />
-          </button>
-        );
-      };
-      const downBtn = () => {
-        return (
-          <button onClick={() => this.callPositionAnswer(index+1, index, 'vert')} className={btnDownClassName}>
-            <img
-              className= "answer__arrow-btns__arrow-btn__down__img"
-              alt="move answers to left side or right side"
-              src={require('../../../shared/assets/down-arrow.svg')}
-            />
-          </button>
-        );
-      };
+      const upBtn = () => (
+        <button
+          onClick={() => this.callPositionAnswer(index - 1, index, 'vert')}
+          className={btnUpClassName}
+        >
+          <img
+            className="answer__arrow-btns__arrow-btn__up__img"
+            alt="move answers to left side or right side"
+            src={require('../../../shared/assets/up-arrow.svg')}
+          />
+        </button>
+      );
+
+      const downBtn = () => (
+        <button
+          onClick={() => this.callPositionAnswer(index + 1, index, 'vert')}
+          className={btnDownClassName}
+        >
+          <img
+            className="answer__arrow-btns__arrow-btn__down__img"
+            alt="move answers to left side or right side"
+            src={require('../../../shared/assets/down-arrow.svg')}
+          />
+        </button>
+      );
       return (
         <div>
           {horizBtn()}
@@ -124,7 +129,7 @@ class Answer extends Component {
     );
   }
 
-  render () {
+  render() {
     const {
       connectDragSource,
       isDragging,
@@ -139,18 +144,27 @@ class Answer extends Component {
       answerBtnClassName += ' --active';
     }
 
-    return connectDragSource(
-
-      <div
-        action={this.action}
-        className="answer my-4">
-        <button onClick={() => toggleArrowButtons(index)} className={isDragging ? `${answerBtnClassName}  --active` : answerBtnClassName}>
-          <p className="m-2">{answersDict[index]}</p>
-        </button>
-        { (activeAnswer.index === index && activeAnswer.side === side) ? this.renderArrowButtons(index) : ''}
-      </div>
-    )
+    return connectDragSource(<div
+      action={this.action}
+      className="answer my-4"
+    >
+      <button onClick={() => toggleArrowButtons(index)} className={isDragging ? `${answerBtnClassName}  --active` : answerBtnClassName}>
+        <p className="m-2">{answersDict[index]}</p>
+      </button>
+      { (activeAnswer.index === index && activeAnswer.side === side) ? this.renderArrowButtons(index) : ''}
+    </div>);
   }
 }
 
-export default DragSource(DRAGGABLE_TYPE_ANSWER, answerSource, collect)(Answer)
+Answer.propTypes = {
+  toggleArrowButtons: PropTypes.func.isRequired,
+  activeAnswer: PropTypes.objectOf(PropTypes.string).isRequired,
+  side: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  answersDict: PropTypes.objectOf(PropTypes.any).isRequired,
+  totalAnswers: PropTypes.number.isRequired,
+  positionAnswer: PropTypes.func.isRequired,
+  activeQuestion: PropTypes.number.isRequired,
+};
+
+export default DragSource(DRAGGABLE_TYPE_ANSWER, answerSource, collect)(Answer);
