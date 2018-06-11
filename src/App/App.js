@@ -34,10 +34,9 @@ class App extends Component {
     }
   }
 
-  resetActiveQuestion(activeQuestion) {
+  setAnswerPosition(answer, position) {
     const { dispatch } = this.props;
-    console.log('attempting to reset')
-    dispatch(questionActions.resetActiveQuestion(activeQuestion))
+    dispatch(questionActions.setAnswerPosition(answer, position));
   }
 
   positionAnswer(data) {
@@ -45,9 +44,9 @@ class App extends Component {
     dispatch(questionActions.positionAnswer(data));
   }
 
-  setAnswerPosition(answer, position) {
+  resetActiveQuestion(activeQuestion) {
     const { dispatch } = this.props;
-    dispatch(questionActions.setAnswerPosition(answer, position));
+    dispatch(questionActions.resetActiveQuestion(activeQuestion));
   }
 
   render() {
@@ -96,7 +95,8 @@ class App extends Component {
               <div className="app__question-box__question-container__reset-container">
                 <button
                   className="app__question-box__question-container__reset-container__btn btn btn-link"
-                  onClick={() => this.resetActiveQuestion(activeQuestion)} >
+                  onClick={() => this.resetActiveQuestion(activeQuestion)}
+                >
                   RESET
                 </button>
               </div>
@@ -104,10 +104,18 @@ class App extends Component {
 
           </div>
           <div className="app__btns-container row align-items-center justify-content-between ">
-            <button type="button" onClick={ () => this.setActiveQuestion(activeQuestion - 1)} className="app__btns-container__btn --prev col-2 btn btn-secondary">
+            <button
+              type="button"
+              onClick={() => this.setActiveQuestion(activeQuestion - 1)}
+              className="app__btns-container__btn --prev col-2 btn btn-secondary"
+            >
               PREV
             </button>
-            <button type="button" onClick={() => this.setActiveQuestion(activeQuestion + 1)} className="app__btns-container__btn --next col-2 btn btn-primary">
+            <button
+              type="button"
+              onClick={() => this.setActiveQuestion(activeQuestion + 1)}
+              className="app__btns-container__btn --next col-2 btn btn-primary"
+            >
               NEXT
             </button>
           </div>
