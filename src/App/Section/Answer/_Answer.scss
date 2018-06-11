@@ -1,0 +1,111 @@
+$option-height: 60px;
+$option-border-radius: 10px;
+$option-background: #F9F9F9;
+$placeholder-primary-color: lightgray;
+$border-color: lightgray;
+$shadow-color: #595959;
+
+.answer {
+  position: relative;
+  width: inherit;
+  background-color: inherit;
+  &__answer-btn {
+    width: inherit;
+    height: $option-height;
+    background: $option-background;
+    border: 1px solid $border-color;
+    border-radius: $option-border-radius;
+    p {
+      font-size: 1rem;
+    }
+    &.--active {
+      width: 104%;
+      margin-left: -2%;
+      background: #007bff;
+      box-shadow: 1px 1px 3px $border-color;
+      color: white;
+    }
+     &:focus {
+       outline: none;
+
+     }
+  }
+
+  &__arrow-btn {
+    position: absolute;
+    padding: 0px;
+    background: inherit;
+    border: none;
+
+    top: 0;
+    &.--hor{
+      height: $option-height;
+      img {
+        height: calc(#{$option-height}  - 20px);
+      }
+    }
+
+    &.--left {
+      right: calc(-18% / .66 - 10px); //66% is width of answer container. I want to convert back to positioning of total section.
+    }
+    &.--right {
+      left: calc(-18% / .66 - 10px); //66% is width of answer container. I want to convert back to positioning of total section.
+
+    }
+    &:focus {
+      outline: none;
+    }
+
+    img {
+      width: 30px;
+    }
+
+  }
+
+  &__arrow-btns {
+    position: absolute;
+    right: calc(-34% + 30px);
+    height: $option-height;
+    display: block;
+    top: 0px;
+    &__arrow-btn {
+      height: calc(#{$option-height} / 2 - 5px);
+      padding: 0px;
+      background: inherit;
+      border: none;
+      display: block;
+      &.--vert {
+
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &.--up {
+        margin-bottom: 10px;
+        img {
+          height: inherit;
+
+        }
+      }
+
+      &.--is-disabled {
+        img {
+          -webkit-filter: grayscale(100%) brightness(150%); /* Safari 6.0 - 9.0 */
+          filter: grayscale(100%) brightness(150%);
+        }
+
+
+        opacity: 75%;
+      }
+
+      &.--down {
+        margin-top: 10px;
+        img {
+          height: inherit;
+        }
+      }
+    }
+  }
+}

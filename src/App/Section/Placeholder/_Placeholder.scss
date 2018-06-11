@@ -1,0 +1,21 @@
+$option-height: 60px;
+$option-border-radius: 10px;
+$option-background: #F9F9F9;
+$placeholder-primary-color: lightgray;
+$border-color: lightgray;
+$shadow-color: #595959;
+
+.placeholder-container {
+  position: relative;
+  z-index: 2;
+  &__number {
+    position: absolute;
+    color: $placeholder-primary-color;
+  }
+  &__placeholder {
+    height: $option-height;
+    width: 100%;
+    border-radius: $option-border-radius;
+    border: 1px dashed $border-color;
+  }
+}
