@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Section from './Section/Section';
+import { dragPreviewSrc, horArrowSrc, upArrowSrc, downArrowSrc } from '../shared/assets/assetURLs';
+
 import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
@@ -119,6 +121,12 @@ class App extends Component {
               NEXT
             </button>
           </div>
+        </div>
+        <div style={{ display: 'None' }} className="image-loader">
+          <img alt="blurred preview when you drag a answer across screen" src={dragPreviewSrc} />
+          <img alt="horizontal arrows" src={horArrowSrc} />
+          <img alt="down arrow"src={downArrowSrc} />
+          <img alt="up arrow" src={upArrowSrc} />
         </div>
       </div>
     );

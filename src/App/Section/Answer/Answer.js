@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
-import dragPreview from '../../../shared/assets/drag-preview.png';
-
+import { dragPreviewSrc, horArrowSrc, upArrowSrc, downArrowSrc } from '../../../shared/assets/assetURLs';
 import { DRAGGABLE_TYPE_ANSWER } from '../../../redux/constants';
 import './_Answer.scss';
 
@@ -38,7 +37,7 @@ class Answer extends Component {
 
   componentDidMount() {
     const img = new Image();
-    img.src = dragPreview;
+    img.src = dragPreviewSrc;
     img.style.opacity = 0.5;
     this.props.connectDragPreview(img);
   }
@@ -74,7 +73,7 @@ class Answer extends Component {
         <img
           className="answer__arrow-btn__img"
           alt="move answers to left side or right side"
-          src={require('../../../shared/assets/horizontal-arrows.svg')}
+          src={horArrowSrc}
         />
       </button>
     );
@@ -97,7 +96,7 @@ class Answer extends Component {
           <img
             className="answer__arrow-btns__arrow-btn__up__img"
             alt="move answers to left side or right side"
-            src={require('../../../shared/assets/up-arrow.svg')}
+            src={upArrowSrc}
           />
         </button>
       );
@@ -110,7 +109,7 @@ class Answer extends Component {
           <img
             className="answer__arrow-btns__arrow-btn__down__img"
             alt="move answers to left side or right side"
-            src={require('../../../shared/assets/down-arrow.svg')}
+            src={downArrowSrc}
           />
         </button>
       );
