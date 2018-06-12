@@ -12,7 +12,7 @@ The application makes significant use of Google's Firebase platform. Questions a
 All the images used in the application are stored in Firebase's Cloud Storage facility.
 
 #### FRONTEND
-The application was built using Facebook's React framework. Given the straight-forward backend system required by the project, I wanted to use a design-focused web framework.  I chose React because of its emphasis on simple, easy-to-replicate UI components. Not only does React help keep code organized, but is repeatable style would serve me well should I ever need to expand the project to support additional features.
+The application was built using Facebook's React framework. Given the straight-forward backend system required by the project, I wanted to use a design-focused web framework.  I chose React because of its emphasis on simple, easy-to-replicate UI components. Not only does React help keep code organized, but its repeatable style would serve me well should I ever need to expand the project to support additional features.
 
 To manipulate the application state, I decided to add Redux to the application. I prefer Redux as a state handler because of its ability to store all important data in a central location. This helps keep the project organized.
 
@@ -92,7 +92,7 @@ To make the application accessible to all types of users, I implemented the foll
 ### UI Differences
 The following are areas where the functionality of my project diverges from the assignment, and the explanations as to why:
 
-**1. Arrow Buttons** At first glance, I thought  unintuitive that the arrow buttons referred to the answer that is currently active. As such, I made the arrow buttons render dynamically next to the active answer, and only when an answer is active.
+**1. Arrow Buttons** At first glance, I thought it  unintuitive that the arrow buttons referred to the answer that is currently active. As such, I made the arrow buttons render dynamically next to the active answer, and only when an answer is active.
 
 Unfortunately, this caused issues later on in the development (see below section). Perhaps this is why Kaplan designed's them as they did!
 
