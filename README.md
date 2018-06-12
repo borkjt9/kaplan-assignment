@@ -18,15 +18,15 @@ To manipulate the application state, I decided to add Redux to the application. 
 
 #### Third Party Libaries
 During the development of the application, I made use of the following libraries:
-  1. React
-  2. Redux
-  3. ESLint
-  4. Firebase
-  5. React-dnd (the drag and drop library used)
-  6. React Spinkit
-  7. Webpack
-  8. Jest
-  9. Enzyme
+  1. React (https://reactjs.org/)
+  2. Redux (https://redux.js.org/)
+  3. ESLint (https://eslint.org/)
+  4. Firebase (https://firebase.google.com/docs/)
+  5. React-dnd (http://react-dnd.github.io/react-dnd/)
+  6. React Spinkit (https://github.com/KyleAMathews/react-spinkit)
+  7. Webpack (https://webpack.js.org/)
+  8. Jest (https://facebook.github.io/jest/)
+  9. Enzyme (http://airbnb.io/enzyme/)
 
 ### Installation
 
@@ -78,9 +78,13 @@ For more detail on the BEM method, visit: http://getbem.com/introduction/.
 
 ### Accessibility
 To make the application accessible to all types of users, I implemented the following rules:
+
 **1. HTML Language Attribute.** Declaring a language attribute on the HTML element enables a screen reader to read out the text with correct pronunciation.
+
 **2. Buttons.** Ensure they have a :focus state and that they are recognizable.
+
 **3. Images.**  Use alt texts.
+
 **4. Color and Contrast.** Ensure that the foreground and background colors of the application have sufficient contrast in order to make more readable for everyone.
 
 ### UI Differences
