@@ -15,7 +15,7 @@ import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
-class App extends Component {
+export class App extends Component {
   /**
    * The highest order React component. It connects to the Redux Store.
    * All other components are fed store data as props.
@@ -38,7 +38,9 @@ class App extends Component {
    * When an Answer component is clicked or dragged, setActiveAnswer
    * stores that answer as active in the redux store.
    *
-   * @param {Object} activeAnswer - The new active answer. EXAMPLE: { side: 'left', index: 1 }
+   * @param {Object} activeAnswer - The new active answer.
+   * @key {String} side - The active side. Either 'left' or 'right'.
+   * @key {Number} index - The index of the active answer
    */
   setActiveAnswer(activeAnswer) {
     const { dispatch, questions } = this.props;
@@ -69,14 +71,14 @@ class App extends Component {
   }
 
   /**
-   * Rotates through questions in question props.
+   * Submits information for new answer position.
    *
    * @param {Object} answerPosDict - Contains all info necessary to position answer to new location
-   * EXAMPLE: { toIndex,
-   *            fromIndex,
-   *            activeQuestion,
-   *            toSide,
-   *            fromSide }
+   * @key {Number} toIndex - new index position of answer.
+   * @key {Number} fromIndex - old index position of answer.
+   * @key {Number} activeQuestion - number reference for current question.
+   * @key {String} toSide - new side of answer. Either 'left' or 'right'.
+   * @key {String} fromSide - old side of answer. Either'left' or 'right'.
    */
   positionAnswer(answerPosDict) {
     const { dispatch } = this.props;
@@ -241,5 +243,6 @@ App.propTypes = {
 function mapStateToProps(state) {
   return (state);
 }
+
 
 export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(App));

@@ -48,7 +48,7 @@ function collect(connect, monitor) {
   };
 }
 
-class Answer extends Component {
+export class Answer extends Component {
   /**
    * Answers are rendered in locations whenever an answer is not.
    * Connected to react-dnd higher order component 'DropTarget'.
@@ -56,10 +56,10 @@ class Answer extends Component {
 
   componentDidMount() {
     // Supplies img to be used in drag action.
-    const img = new Image();
-    img.src = dragPreviewSrc;
-    img.style.opacity = 0.5;
-    this.props.connectDragPreview(img);
+    // const img = new Image();
+    // img.src = dragPreviewSrc;
+    // img.style.opacity = 0.5;
+    // this.props.connectDragPreview(img);
   }
 
   /**
@@ -201,7 +201,7 @@ Answer.propTypes = {
    * Current active answer. Supplied to toggleArrowButtons.
    * EXAMPLE: {side: 'left', index: 2}
    */
-  activeAnswer: PropTypes.objectOf(PropTypes.string).isRequired,
+  activeAnswer: PropTypes.objectOf(PropTypes.any).isRequired,
   /** Side answer is found on. */
   side: PropTypes.string.isRequired,
   /** current index of answer. */

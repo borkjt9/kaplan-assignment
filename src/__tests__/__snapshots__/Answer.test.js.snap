@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Answer renders snapshot correctly 1`] = `
+<div
+  action={undefined}
+  className="answer my-4"
+>
+  <button
+    className="answer__answer-btn --active  --active"
+    onClick={[Function]}
+  >
+    <p
+      className="m-2"
+    >
+      Test
+    </p>
+  </button>
+  <button
+    className="answer__arrow-btn --hor --left"
+    onClick={[Function]}
+  >
+    <img
+      alt="move answers to left side or right side"
+      className="answer__arrow-btn__img"
+      src="https://firebasestorage.googleapis.com/v0/b/kaplan-assignment.appspot.com/o/horizontal-arrows.svg?alt=media&token=c4ea3d7b-5327-429b-9909-3b26f946c24e"
+    />
+  </button>
+</div>
+`;

@@ -8,13 +8,15 @@ $shadow-color: #595959;
 .placeholder-container {
   position: relative;
   z-index: 2;
+  width: 100%;
+
   &__number {
     position: absolute;
     color: $placeholder-primary-color;
   }
   &__placeholder {
     height: $option-height;
-    width: 100%;
+    width: inherit;
     border-radius: $option-border-radius;
     border: 1px dashed $border-color;
   }

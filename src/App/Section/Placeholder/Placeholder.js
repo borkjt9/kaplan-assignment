@@ -100,7 +100,7 @@ function renderOverlay(color) {
   );
 }
 
-class Placeholder extends Component {
+export class Placeholder extends Component {
   /**
    * Placeholders are rendered in locations whenever an answer is not.
    * Connected to react-dnd higher order component 'DropTarget'.
@@ -137,8 +137,8 @@ Placeholder.propTypes = {
   fromIndex: PropTypes.number.isRequired,
   /** Changes position of answer to current placeholder position. Fed up to App component. */
   positionAnswer: PropTypes.func.isRequired,
-  /** Active question umber. Used if answer is 'dropped'. */
-  activeQuestion: PropTypes.objectOf(PropTypes.any).isRequired,
+  /** Active question number. Used if answer is 'dropped'. */
+  activeQuestion: PropTypes.number.isRequired,
   /** side of old answer. Used if answer is 'dropped'. */
   fromSide: PropTypes.string.isRequired,
   /** side of placeholder. Used if answer is 'dropped'. */

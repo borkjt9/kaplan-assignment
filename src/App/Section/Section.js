@@ -11,6 +11,7 @@ import Answer from './Answer/Answer';
 import Placeholder from './Placeholder/Placeholder';
 import './_Section.scss';
 
+
 const Section = (props) => {
   /**
    * There are two Sections: left and right. It containers answer and placeholder locations.
@@ -32,7 +33,7 @@ const Section = (props) => {
    * @param {Number} index - The index of the Answer component being rendered.
    */
   function toggleArrowButtons(index) {
-    if (index === activeAnswer.index) {
+    if (index === activeAnswer.index && side === activeAnswer.side) {
       // Sets index to -1 if you click on the current active answer (i.e. to deselect)
       setActiveAnswer({ side, index: -1 }, activeQuestion);
     } else {

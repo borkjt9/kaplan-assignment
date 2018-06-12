@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Placeholder renders snapshot correctly 1`] = `
+<div
+  className="placeholder-container my-4 d-flex align-items-center"
+>
+  <h1
+    className="placeholder-container__number ml-4"
+  >
+    1
+  </h1>
+  <div
+    className="placeholder-container__placeholder"
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#007bff",
+        "borderRadius": 10,
+        "height": "100%",
+        "left": 0,
+        "marginLeft": "-2%",
+        "position": "absolute",
+        "top": 0,
+        "width": "104%",
+        "zIndex": 2,
+      }
+    }
+  />
+</div>
+`;

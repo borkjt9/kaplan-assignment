@@ -8,6 +8,7 @@ $shadow-color: #595959;
 .answer {
   position: relative;
   background-color: inherit;
+  width: 100%;
   &__answer-btn {
     width: inherit;
     min-height: $option-height;
@@ -45,10 +46,10 @@ $shadow-color: #595959;
     }
 
     &.--left {
-      right: calc(-18% / .66 - 10px); //66% is width of answer container. I want to convert back to positioning of total section.
+      right: calc(-34%);
     }
     &.--right {
-      left: calc(-18% / .66 - 10px); //66% is width of answer container. I want to convert back to positioning of total section.
+      left: calc(-34%);
 
     }
     &:focus {
