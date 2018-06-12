@@ -6,17 +6,17 @@ This assignment is to implement the order interaction component/feature of Kapla
 
 ### Stack
 
-####BACKEND
+#### BACKEND
 The application makes significant use of Google's Firebase platform. Questions are stored as documents in Google's Cloud Firestore database. The questions are then pulled into the application using Firestore's querying API. For additional detail on how to acces Firestore through the API, please visit: https://firebase.google.com/docs/firestore/.
 
 Additionally, all images used in the application are stored in Firebase's Storage.
 
-####FRONTEND
+#### FRONTEND
 The application was built using Facebook's react.js framework. Given the straight-forward backend architecture required by the project, I wanted to use a design-focused framework.  I chose React because of its emphasis on simple, easy-to-replicate components. This would serve me well should I ever need to expand the project to support additional features.
 
 To manipulate the application state, I decided to use Redux. I prefer Redux as a state handler because its ability to  store all important data in a central location helps keep the project organized.
 
-###Third Party Libaries
+#### Third Party Libaries
 During the development of the application, I made use of the following libraries:
   1. React
   2. Redux
