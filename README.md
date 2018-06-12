@@ -7,14 +7,14 @@ This assignment is to implement the order interaction component/feature of Kapla
 ### Stack
 
 #### BACKEND
-The application makes significant use of Google's Firebase platform. Questions are stored as documents in Google's Cloud Firestore database. The questions are then pulled into the application using Firestore's querying API. For additional detail on how to acces Firestore through the API, please visit: https://firebase.google.com/docs/firestore/.
+The application makes significant use of Google's Firebase platform. Questions are stored as documents in Google's Cloud Firestore database. The questions are then pulled into the application using Firestore's querying API. For additional detail on how to access Firestore through the API, please visit: https://firebase.google.com/docs/firestore/.
 
-Additionally, all images used in the application are stored in Firebase's Storage.
+All the images used in the application are stored in Firebase's Cloud Storage facility.
 
 #### FRONTEND
-The application was built using Facebook's react.js framework. Given the straight-forward backend architecture required by the project, I wanted to use a design-focused framework.  I chose React because of its emphasis on simple, easy-to-replicate components. This would serve me well should I ever need to expand the project to support additional features.
+The application was built using Facebook's React framework. Given the straight-forward backend system required by the project, I wanted to use a design-focused web framework.  I chose React because of its emphasis on simple, easy-to-replicate UI components. Not only does React help keep code organized, but is repeatable style would serve me well should I ever need to expand the project to support additional features.
 
-To manipulate the application state, I decided to use Redux. I prefer Redux as a state handler because its ability to  store all important data in a central location helps keep the project organized.
+To manipulate the application state, I decided to add Redux to the application. I prefer Redux as a state handler because of its ability to store all important data in a central location. This helps keep the project organized.
 
 #### Third Party Libaries
 During the development of the application, I made use of the following libraries:
@@ -51,7 +51,7 @@ To build for production, run the following command:
 
 ### Testing
 
-I used a combination of:
+To test, I used a combination of:
   1. Jest, Facebook's open-sourced JavaScript testing framework;
   2. Enzyme, a JavaScript Testing utility created by AirBnB that makes it easier to assert, manipulate, and traverse React Components' output;
 
@@ -63,9 +63,13 @@ npm test
 ### Styling
 
 #### Sass
-In lieu of traditional css I installed Sass, a css precompiler. Sass lets you use features that don't exist in CSS  like variables, nesting, mixins, and inheritance. Particularly, I find the nesting and variable assignment properties help to keep the project organized.
+In lieu of traditional css I installed Sass, which is a css precompiler. Sass lets you use features that don't exist in CSS  like variables, nesting, mixins, and inheritance. Particularly, I find that the nesting and variable assignment properties help to keep the project organized.
 
-In additional, I added the third-party stylesheets Normalize and Bootstrap. Normalize makes rendering of elements consistent across browsers. Bootstrap is a powerful grid system developed by Twitter to make web pages responsive.
+In additional, I added the third-party stylesheets Normalize and Bootstrap. Normalize makes the rendering of elements consistent across browsers. Bootstrap is a powerful grid system developed by Twitter to make web pages responsive.
+
+#### Linter
+
+I use a linter to keep my code clean and organized. I prefer to use airbnb's style code, and load it directly into my text editor (Atom 2). This way, I can still see all my errors, but they do not block my application from rendering as I work.
 
 #### Organization
 To organize my styles, I use the Blocks, Elements, and Modifiers (BEM) methodology. While the naming convention may seem verbose at times,  I find it makes components easier to understand and debug.
@@ -80,45 +84,45 @@ To make the application accessible to all types of users, I implemented the foll
 **4. Color and Contrast.** Ensure that the foreground and background colors of the application have sufficient contrast in order to make more readable for everyone.
 
 ### UI Differences
-The following are areas where the functionality of my project diverges from the assignment, and explanations why:
+The following are areas where the functionality of my project diverges from the assignment, and the explanations as to why:
 
-**1. Arrow Buttons** I think it is unintuitive that the arrow buttons relate to the answer that is currently active. As such, I made the arrow buttons render dynamically next to the active answer, and only when an answer is active.
+**1. Arrow Buttons** At first glance, I thought  unintuitive that the arrow buttons referred to the answer that is currently active. As such, I made the arrow buttons render dynamically next to the active answer, and only when an answer is active.
 
-Unfortunately, this caused issues later on in the development (see below section). Perhaps this is why Kaplan keep's them as they do! :)
+Unfortunately, this caused issues later on in the development (see below section). Perhaps this is why Kaplan designed's them as they did!
 
-**2. Loading Notification** I added a loading animation that shows when the application is pulling the questions from Firebase.
+**2. Loading Notification** I added a loading animation that shows when the application initial pulls the questions prompts from Firebase.
 
 ### Known Issues
-The following are known, not fatal issues with the application. Given that the application is still functional with these issues, I prioritized completing the application in a timely manner (i.e. send for your review).
+The following are known, non-fatal issues with the application. Given that the application is still functional with these issues, I prioritized completing the application and sending it for your review in a timely manner over perfection.
 
-**1. Drag-and-Drop Feature** To implement the requested drag-and-drop feature, I used the third-party library 'react-dnd'. I had never used this library before, but it was well documented and quite popular. Unfortunately, this library later caused issues for me. Most significantly, I learned that there is a known issue that causes the library to break on the most updated versions of Firefox and Safari.
+**1. Drag-and-Drop Feature** To implement the requested drag-and-drop feature, I used the third-party library called 'react-dnd'. I had never used this library before, but it was well documented and quite popular. Unfortunately, this library later caused issues for me. Most significantly, I learned that there is a known issue that causes the library to break on the most updated versions of Firefox and Safari when combined with the most updated version of React.
 
-Additionally, the library does not play nice with unit testing or previewing the 'dragged' answer.
+Additionally, on a smaller level, the library does not play nice with modern libraries for unit testing.
 
-**2. Pre-loading images on Safari** I run a small piece of non-displayed jsx in my App component to load and cache the application's images before they are rendered.
+**2. Pre-loading images on Safari** In the highest-level component of the application, I run a small piece of non-displayed jsx to load and cache the application's images before they are rendered.
 
-However, this tactic does not seem to work on Safari. So each time a button is clicked, there is a slight lag on while the image is loading. An easy fix, given that the application uses only five images, is to include them directly in the application. However, this is not scalable.
+However, this tactic does not seem to work on Safari. Each time a button is clicked, there is a slight lag on while the image is loading. Given that the application uses only five images, an easy fix would be to include the images directly in the application. However, this is not scalable.
 
 **3. Mobile Layout** The application on mobile has spacing issues. Additionally, it is not easy to navigate. Given the design of the application, I would most likely make significant changes to make it completely accessible via mobile. Specifically, I would do the following:
   1. Add media queries that load css based on the screen size of the application.
   2.  Change layout of answer container so that rather than moving answers between two columns, I would move numbers to align next to each answer. This would allow you to render all elements in a single column.
 
 ### What I would do differently
-If I had unlimited time, I could completely recreate the table from scratch, I would do the following differently.
+If I had unlimited time, I would do the following differently.
 
-**1. Use a different drag-n-drop library** The library I decided to use led to significant problems, as mentioned above. I would spend more time researching all available libraries and pick the one that best fits my needs. I could also develop my own.
+**1. Use a different drag-n-drop library** The library I decided to use led to significant problems, as mentioned above. I would spend more time researching all available libraries and pick the one that best fits my needs. I could also develop my own if needed.
 
-**2. Give arrow buttons their own component** To make it easy for the arrow buttons to dynamically render next to the active answer, I included them in the Answer Component. However, this caused complexity issues later on in terms of event propagation, amongst other things. If I had a do-over, I would give them their own component and have them pass the location of the active answer in the compoent's props.
+**2. Give arrow buttons their own component** To make it easy for the arrow buttons to dynamically render next to the active answer, I included them in the Answer Component. However, this caused complexity issues later on in terms of event propagation, amongst other things. If I had a do-over, I would give them their own component and pass the location of the active answer to the component's props.
 
-**3. Develop with a mobile first mindset** As mentioned above, I ran into issues with the layout when I tested it on mobile. I would have architected the project to be accessibility on mobile from the beginning.
+**3. Develop with a mobile first mindset** As mentioned above, I ran into issues with the layout when I tested it on mobile. I would have architected the project to be accessibility on mobile from the start.
 
 ### What I have learned
 
 This was a great assignment to work on. Specifically, it allowed me to become more familiar with quickly integrating third-party libraries into an application, as well as building unit tests with React's recommended testing libraries.
 
-This assignment also reinforced for me how important it is to spend time at the onset to scope out and design the architecture for the entire application, from backend to frontend.
+This assignment also reinforced for me how important it is to spend time at the onset to scope out and design the architecture for the entire system. Even in a small, contained project like this, there was significant risk of the code spiraling out of control and becoming unreadable if it wasn't properly organized.
 
-Given the short deadline for this project, if I did not plan the project appropriately from the beginning, there was potential to run into significant issues that I would not have had the time to fix.
+Given the short deadline for this project, if I did not adequately sketch the design of system appropriately at the beginning, there would have been significant risk of running into issues that I would not have had the time to fix.
 
 ### License
 

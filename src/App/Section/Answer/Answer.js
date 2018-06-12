@@ -21,15 +21,12 @@ const answerSource = {
    */
   beginDrag(props) {
     const {
-      id,
-      left,
-      top,
       side,
       index,
     } = props;
 
     props.setActiveAnswer({ side, index });
-    return { id, left, top };
+    return { };
   },
 };
 
