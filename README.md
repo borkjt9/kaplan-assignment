@@ -65,7 +65,7 @@ npm test
 #### Sass
 In lieu of traditional css I installed Sass, which is a css precompiler. Sass lets you use features that don't exist in CSS  like variables, nesting, mixins, and inheritance. Particularly, I find that the nesting and variable assignment properties help to keep the project organized.
 
-In additional, I added the third-party stylesheets Normalize and Bootstrap. Normalize makes the rendering of elements consistent across browsers. Bootstrap is a powerful grid system developed by Twitter to make web pages responsive.
+In addition, I added the third-party stylesheets Normalize and Bootstrap. Normalize makes the rendering of elements consistent across browsers. Bootstrap is a powerful grid system developed by Twitter to make web pages responsive.
 
 #### Linter
 
@@ -120,11 +120,11 @@ Another solution would be to create a Sprite, or Sprites. This solution would be
 ### What I would do differently
 If I had unlimited time, I would do the following differently.
 
-**1. Use a different drag-n-drop library** The library I decided to use led to significant problems, as mentioned above. I would spend more time researching all available libraries and pick the one that best fits my needs. I could also develop my own if needed.
+**1. Use a different drag-n-drop library.** The library I decided to use led to significant problems, as mentioned above. I would spend more time researching all available libraries and pick the one that best fits my needs. I could also develop my own if needed.
 
-**2. Give arrow buttons their own component** To make it easy for the arrow buttons to dynamically render next to the active answer, I included them in the Answer Component. However, this caused complexity issues later on in terms of event propagation, amongst other things. If I had a do-over, I would give them their own component and pass the location of the active answer to the component's props.
+**2. Give arrow buttons their own component.** To make it easy for the arrow buttons to dynamically render next to the active answer, I included them in the Answer Component. However, this caused complexity issues later on in terms of event propagation, amongst other things. If I had a do-over, I would give them their own component and pass the location of the active answer to the component's props.
 
-**3. Develop with a mobile first mindset** As mentioned above, I ran into issues with the layout when I tested it on mobile. I would have architected the project to be accessibility on mobile from the start.
+**3. Develop with a mobile first mindset.** As mentioned above, I ran into issues with the layout when I tested it on mobile. I would have architected the project to be accessibility on mobile from the start.
 
 ### What I have learned
 
@@ -132,7 +132,6 @@ This was a great assignment to work on. Specifically, it allowed me to become mo
 
 This assignment also reinforced for me how important it is to spend time at the onset to scope out and design the architecture for the entire system. Even in a small, contained project like this, there was significant risk of the code spiraling out of control and becoming unreadable if it wasn't properly organized.
 
-Given the short deadline for this project, if I did not adequately sketch the design of system appropriately at the beginning, there would have been significant risk of running into issues that I would not have had the time to fix.
 
 ### License
 
