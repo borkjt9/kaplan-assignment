@@ -107,7 +107,11 @@ Additionally, on a smaller level, the library does not play nice with modern lib
 
 **2. Pre-loading images on Safari** In the highest-level component of the application, I run a small piece of non-displayed jsx to load and cache the application's images before they are rendered.
 
-However, this tactic does not seem to work on Safari. Each time a button is clicked, there is a slight lag on while the image is loading. Given that the application uses only five images, an easy fix would be to include the images directly in the application. However, this is not scalable.
+However, this tactic does not seem to work on Safari. Each time a button is clicked, there is a slight lag on while the image is loading.
+
+Given that the application uses only five images, an easy fix would be to include the images directly in the application. However, this is not scalable.
+
+Another solution would be to create a Sprite, or Sprites. This solution would be more scalable, but possibly increase initial load time.
 
 **3. Mobile Layout** The application on mobile has spacing issues. Additionally, it is not easy to navigate. Given the design of the application, I would most likely make significant changes to make it completely accessible via mobile. Specifically, I would do the following:
   1. Add media queries that load css based on the screen size of the application.
