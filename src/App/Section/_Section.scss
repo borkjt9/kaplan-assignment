@@ -2,6 +2,7 @@ $option-height: 60px;
 
 .section {
   width: 45vw;
+  min-width: 325px;
   margin: auto;
   &__answers-container {
     width: 95%;

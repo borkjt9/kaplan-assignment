@@ -42,6 +42,7 @@ $header-color: #23166A;
     max-width: $container-max-width;
     width: inherit;
     &__btn {
+      min-width: 100px;
       &.--nxt {
 
       }

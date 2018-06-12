@@ -141,6 +141,7 @@ export class App extends Component {
         <p className="app__question-box__question-container__question-text">
           {questionText}
         </p>
+        <p className="app__question-box__question-container__reorder-text my-3" >Reorder the list to the correct order:</p>
         <div className="app_question-box__question-container__options row">
           <Section
             answersDict={left}
