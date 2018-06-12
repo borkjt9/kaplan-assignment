@@ -15,7 +15,7 @@ import * as questionActions from '../redux/actions/questions';
 import './_App.scss';
 import '../shared/styles/_rootStyles.scss';
 
-export class App extends Component {
+class App extends Component {
   /**
    * The highest order React component. It connects to the Redux Store.
    * All other components are fed store data as props.

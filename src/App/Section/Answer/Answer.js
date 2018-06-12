@@ -174,7 +174,7 @@ export class Answer extends Component {
       answerBtnClassName += ' --active';
     }
 
-    //connectDragSource is react-dnd function.
+    // connectDragSource is react-dnd function.
     return connectDragSource(
       <div
         action={this.action}
