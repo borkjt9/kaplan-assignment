@@ -87,6 +87,8 @@ To make the application accessible to all types of users, I implemented the foll
 
 **4. Color and Contrast.** Ensure that the foreground and background colors of the application have sufficient contrast in order to make more readable for everyone.
 
+**5. Avoid Hidden Content.** Avoid using CSS tag {display: none} wherever possible.
+
 ### UI Differences
 The following are areas where the functionality of my project diverges from the assignment, and the explanations as to why:
 
