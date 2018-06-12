@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
-import { dragPreviewSrc, horArrowSrc, upArrowSrc, downArrowSrc } from '../../../shared/assets/assetURLs';
+import { dragPreviewSrc1, dragPreviewSrc2, dragPreviewSrc3, horArrowSrc, upArrowSrc, downArrowSrc } from '../../../shared/assets/assetURLs';
 import { DRAGGABLE_TYPE_ANSWER } from '../../../redux/constants';
 import './_Answer.scss';
 
@@ -56,10 +56,14 @@ export class Answer extends Component {
 
   componentDidMount() {
     // Supplies img to be used in drag action.
-    // const img = new Image();
-    // img.src = dragPreviewSrc;
-    // img.style.opacity = 0.5;
-    // this.props.connectDragPreview(img);
+    // ATTENTION
+    // below needs to be commented out for testing to work.
+    const img = new Image();
+    img.src = dragPreviewSrc1;
+    img.srcSet = `${dragPreviewSrc1} 120w, ${dragPreviewSrc2} 240w, ${dragPreviewSrc3} 360w`;
+    img.sizes = '(max-width: 120px), 350px';
+    img.style.opacity = 0.5;
+    this.props.connectDragPreview(img);
   }
 
   /**

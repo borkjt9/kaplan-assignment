@@ -26,7 +26,8 @@ $shadow-color: #595959;
       color: white;
     }
      &:focus {
-       outline: none;
+       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+       outline: None;
 
      }
   }
@@ -53,7 +54,9 @@ $shadow-color: #595959;
 
     }
     &:focus {
-      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      outline: None;
+
     }
 
     img {
@@ -79,7 +82,8 @@ $shadow-color: #595959;
       }
 
       &:focus {
-        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        outline: None;
       }
 
       &.--up {

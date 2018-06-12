@@ -12,6 +12,8 @@ $header-color: #23166A;
       width: inherit;
       border: solid 1px $border-color;
       box-shadow: 1px 1px 1px $border-color;
+      min-height: 500px;
+
       &__header {
         width: inherit;
         background-color: $header-color;
